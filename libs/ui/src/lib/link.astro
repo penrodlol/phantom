@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const variants = tv({
+  base: 'inline-flex rounded focus-visible:ring-1 focus-visible:outline-none',
+  defaultVariants: { variant: 'internal' },
+  variants: {
+    active: { true: 'text-foreground-1', false: 'text-foreground-2' },
+    disabled: { true: 'pointer-events-none text-foreground-2/60' },
+    variant: {
+      internal: 'hover:text-foreground-1 motion-safe:transition-colors',
+      external: '',
+    },
+  },
+});
+
+type Props = HTMLAttributes<'a'> & VariantProps<typeof variants>;
+
+const { class: className, active, variant, disabled, ...props } = Astro.props;
+---
+
+<a {...props} class={twMerge(variants({ active, variant, disabled }), className)}><slot /></a>

@@ -2,6 +2,9 @@
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@phantom/ui/*": ["libs/ui/src/lib/*"] }
+    "paths": {
+      "@phantom/docs/*": ["apps/docs/src/*"],
+      "@phantom/ui/*": ["libs/ui/src/lib/*"]
+    }
   }
 }

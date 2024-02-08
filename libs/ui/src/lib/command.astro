@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'kbd'> & { value: string };
+
+const { class: className, value, ...props } = Astro.props;
+---
+
+<kbd {...props} class={twMerge('bg-surface-3 rounded px-1 py-px font-sans text-xs', className)}>
+  {value}
+</kbd>

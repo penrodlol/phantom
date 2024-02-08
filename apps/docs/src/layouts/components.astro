@@ -1,0 +1,52 @@
+---
+import Badge from '@phantom/ui/badge.astro';
+import Link from '@phantom/ui/link.astro';
+import { getCollection } from 'astro:content';
+import Layout from './index.astro';
+
+const components = await getCollection('components');
+const active = Astro.url.pathname.split('/').pop();
+---
+
+<Layout>
+  <div class="mx-auto my-10 grid max-w-screen-2xl grid-cols-[25ch_1fr] gap-10">
+    <aside class="scrollbar-thin flex max-h-[calc(100vh-14rem)] flex-col gap-6 overflow-auto">
+      <div class="flex flex-col gap-2">
+        <h4>Overview</h4>
+        <ul class="text-sm">
+          <!-- TEMPORARY -->
+          <li class="text-foreground-2 px-4 py-1">Getting Started</li>
+          <li class="text-foreground-2 px-4 py-1">Installation</li>
+          <li class="text-foreground-2 px-4 py-1">Changelog</li>
+        </ul>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h4>Components</h4>
+        <ul class="text-sm">
+          {
+            components.map(({ slug, data }) => (
+              <li class="relative">
+                {active === slug && (
+                  <div
+                    transition:name="active-component"
+                    class="bg-foreground-1 absolute inset-y-0 left-0 w-0.5 rounded"
+                  />
+                )}
+                <Link
+                  href={`/components/${slug}`}
+                  active={active === slug}
+                  disabled={data.draft}
+                  class="flex items-center justify-between gap-2 px-4 py-1"
+                >
+                  {data.title}
+                  {data.draft && <Badge color="outline">Coming Soon</Badge>}
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </aside>
+    <section class="rounded border"><slot /></section>
+  </div>
+</Layout>

@@ -1,0 +1,15 @@
+---
+import Layout from '@phantom/docs/layouts/components.astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths = (async () => {
+  return (await getCollection('components'))
+    .filter((props) => !props.data.draft)
+    .map((props) => ({ params: { component: props.slug }, props }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+---
+
+<Layout />
