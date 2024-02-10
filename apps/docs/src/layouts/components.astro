@@ -1,15 +1,21 @@
 ---
-import Badge from '@phantom/ui/badge.astro';
+import * as Breadcrumbs from '@phantom/ui/breadcrumbs';
 import Link from '@phantom/ui/link.astro';
+import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
+import { Home } from 'lucide-astro';
+import { twMerge } from 'tailwind-merge';
 import Layout from './index.astro';
 
+type Props = CollectionEntry<'components'>;
+
+const { slug, data } = Astro.props;
 const components = await getCollection('components');
 const active = Astro.url.pathname.split('/').pop();
 ---
 
 <Layout>
-  <div class="mx-auto my-10 grid max-w-screen-2xl grid-cols-[25ch_1fr] gap-10">
+  <div class="mx-auto my-10 grid max-w-screen-2xl grid-cols-[20ch_1fr] gap-6">
     <aside class="scrollbar-thin flex max-h-[calc(100vh-14rem)] flex-col gap-6 overflow-auto">
       <div class="flex flex-col gap-2">
         <h4>Overview</h4>
@@ -35,11 +41,13 @@ const active = Astro.url.pathname.split('/').pop();
                 <Link
                   href={`/components/${slug}`}
                   active={active === slug}
-                  disabled={data.draft}
-                  class="flex items-center justify-between gap-2 px-4 py-1"
+                  class={twMerge(
+                    'flex items-center justify-between gap-2 px-4 py-1',
+                    'hover:text-foreground-1 motion-safe:transition-colors',
+                    active === slug ? 'text-foreground-1' : 'text-foreground-2',
+                  )}
                 >
                   {data.title}
-                  {data.draft && <Badge color="outline">Coming Soon</Badge>}
                 </Link>
               </li>
             ))
@@ -47,6 +55,25 @@ const active = Astro.url.pathname.split('/').pop();
         </ul>
       </div>
     </aside>
-    <section class="rounded border"><slot /></section>
+    <section class="flex flex-col gap-6 rounded border">
+      <div class="bg-surface-2 flex items-center justify-between gap-4 border-b px-6 py-3">
+        <Breadcrumbs.Root>
+          <Breadcrumbs.Item href="/" aria-label="Home"><Home size={16} /></Breadcrumbs.Item>
+          <Breadcrumbs.Item href="/components">Components</Breadcrumbs.Item>
+          <Breadcrumbs.Item href={`/components/${slug}`}>{data.title}</Breadcrumbs.Item>
+        </Breadcrumbs.Root>
+        <div class="flex items-center gap-4 text-sm">
+          <Link href={data.repo} variant="external">Source</Link>
+          <Link href={data.accessibility} variant="external">Accessibility</Link>
+        </div>
+      </div>
+      <div class="px-10">
+        <h1 class="text-xl font-bold">{data.title}</h1>
+        <p class="text-foreground-2 max-w-prose">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione placeat earum
+          praesentium quod aspernatur est sequi nisi non eius! Consequatur laborum quos.
+        </p>
+      </div>
+    </section>
   </div>
 </Layout>

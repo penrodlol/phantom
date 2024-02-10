@@ -1,16 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { ArrowUpRight } from 'lucide-astro';
 import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const variants = tv({
-  base: 'inline-flex rounded focus-visible:ring-1 focus-visible:outline-none',
+  base: 'inline-flex items-center gap-1 rounded focus-visible:ring-1 focus-visible:outline-none',
   defaultVariants: { variant: 'internal' },
   variants: {
     active: { true: 'text-foreground-1', false: 'text-foreground-2' },
-    disabled: { true: 'pointer-events-none text-foreground-2/60' },
     variant: {
-      internal: 'hover:text-foreground-1 motion-safe:transition-colors',
+      internal: '',
       external: '',
     },
   },
@@ -18,7 +18,15 @@ const variants = tv({
 
 type Props = HTMLAttributes<'a'> & VariantProps<typeof variants>;
 
-const { class: className, active, variant, disabled, ...props } = Astro.props;
+const { class: className, target, rel, active, variant, ...props } = Astro.props;
 ---
 
-<a {...props} class={twMerge(variants({ active, variant, disabled }), className)}><slot /></a>
+<a
+  {...props}
+  target={target ?? (variant === 'external' ? '_blank' : target)}
+  rel={rel ?? (variant === 'external' ? 'noopener noreferrer' : rel)}
+  class={twMerge(variants({ active, variant }), className)}
+>
+  <slot />
+  {variant === 'external' && <ArrowUpRight class="text-foreground-2 size-3" aria-hidden />}
+</a>

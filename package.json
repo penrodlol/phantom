@@ -1,14 +1,19 @@
 {
   "name": "@phantom/ui",
   "private": true,
+  "dependencies": {
+    "@astrojs/check": "^0.4.1",
+    "@fontsource/inter": "^5.0.16",
+    "astro": "^4.3.2",
+    "lucide-astro": "^0.323.0"
+  },
   "devDependencies": {
-    "@nx/js": "18.0.0",
-    "@nx/workspace": "18.0.0",
-    "@types/node": "18.16.9",
     "@astrojs/mdx": "^2.1.1",
     "@astrojs/sitemap": "^3.0.5",
     "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.3.2",
+    "@nx/js": "18.0.0",
+    "@nx/workspace": "18.0.0",
+    "@types/node": "18.16.9",
     "astro-robots-txt": "^1.0.0",
     "nx": "18.0.0",
     "prettier": "^3.2.4",

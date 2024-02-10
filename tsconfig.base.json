@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@phantom/docs/*": ["apps/docs/src/*"],
-      "@phantom/ui/*": ["libs/ui/src/lib/*"]
+      "@phantom/ui/*": ["libs/ui/src/lib/*"],
+      "@phantom/utils/*": ["libs/utils/src/lib/*"]
     }
   }
 }
