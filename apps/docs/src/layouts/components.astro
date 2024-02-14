@@ -1,6 +1,7 @@
 ---
 import * as Breadcrumbs from '@phantom/ui/breadcrumbs';
 import Link from '@phantom/ui/link.astro';
+import Separator from '@phantom/ui/separator.astro';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import { Home } from 'lucide-astro';
@@ -56,15 +57,15 @@ const active = Astro.url.pathname.split('/').pop();
       </div>
     </aside>
     <section class="flex flex-col gap-6 rounded border">
-      <div class="bg-surface-2 flex items-center justify-between gap-4 border-b px-6 py-3">
+      <div class="bg-surface-2 flex justify-between gap-4 rounded-t border-b px-6 py-3">
         <Breadcrumbs.Root>
           <Breadcrumbs.Item href="/" aria-label="Home"><Home size={16} /></Breadcrumbs.Item>
           <Breadcrumbs.Item href="/components">Components</Breadcrumbs.Item>
           <Breadcrumbs.Item href={`/components/${slug}`}>{data.title}</Breadcrumbs.Item>
         </Breadcrumbs.Root>
         <div class="flex items-center gap-4 text-sm">
-          <Link href={data.repo} variant="external">Source</Link>
-          <Link href={data.accessibility} variant="external">Accessibility</Link>
+          <Link href={data.repo}>Source</Link>
+          <Link href={data.accessibility}>Accessibility</Link>
         </div>
       </div>
       <div class="px-10">
@@ -73,6 +74,8 @@ const active = Astro.url.pathname.split('/').pop();
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione placeat earum
           praesentium quod aspernatur est sequi nisi non eius! Consequatur laborum quos.
         </p>
+        <Separator class="mb-10 mt-6" />
+        <slot />
       </div>
     </section>
   </div>

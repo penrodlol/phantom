@@ -1,0 +1,63 @@
+---
+import { SwatchBook } from 'lucide-astro';
+import * as Menu from '@phantom/ui/menu';
+import Button from '@phantom/ui/button.astro';
+
+const themes = [
+  { name: 'Dark Themes', items: ['dark', 'dim'] },
+  { name: 'Light Themes', items: ['light', 'warm'] },
+];
+---
+
+<Menu.Root data-theme>
+  <Button slot="menu-trigger" color="ghost" size="icon" aria-label="Theme">
+    <SwatchBook aria-hidden />
+  </Button>
+  <Menu.Content>
+    {
+      themes.map(({ name, items }) => (
+        <Menu.Group>
+          <Menu.GroupLabel>{name}</Menu.GroupLabel>
+          {items.map((item) => (
+            <Menu.Item>
+              <span class="capitalize">{item}</span>
+              <div class="flex gap-0.5" color-scheme={item}>
+                <div class="bg-surface-primary h-4 w-2 rounded" />
+                <div class="bg-surface-secondary h-4 w-2 rounded" />
+                <div class="bg-surface-accent h-4 w-2 rounded" />
+                <div class="bg-surface-neutral h-4 w-2 rounded" />
+              </div>
+            </Menu.Item>
+          ))}
+        </Menu.Group>
+      ))
+    }
+  </Menu.Content>
+</Menu.Root>
+
+<script is:inline>
+  function setTheme(doc = document) {
+    if ('theme' in localStorage)
+      doc.documentElement.setAttribute('color-scheme', localStorage.getItem('theme'));
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      doc.documentElement.setAttribute('color-scheme', 'dark');
+    else doc.documentElement.setAttribute('color-scheme', 'light');
+  }
+
+  setTheme();
+  document.addEventListener('astro:before-swap', (event) => setTheme(event.newDocument));
+</script>
+
+<script>
+  import { onInit } from '@phantom/utils/component';
+
+  onInit('[data-theme]', (component) => {
+    component.querySelectorAll<HTMLDivElement>('[role=menuitem]').forEach((item) =>
+      item.addEventListener('click', () => {
+        const theme = `${item.textContent}`.trim();
+        document.documentElement.setAttribute('color-scheme', theme);
+        localStorage.setItem('theme', theme);
+      }),
+    );
+  });
+</script>

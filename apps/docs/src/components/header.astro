@@ -1,22 +1,25 @@
 ---
 import Button from '@phantom/ui/button.astro';
 import Command from '@phantom/ui/command.astro';
+import Link from '@phantom/ui/link.astro';
 import Separator from '@phantom/ui/separator.astro';
-import Theme from '@phantom/ui/theme.astro';
 import { Github } from 'lucide-astro';
 import favicon from '../../public/favicon.svg';
+import Theme from './theme.astro';
 ---
 
 <header class="bg-surface-1 rounded-t-2xl border-b text-sm">
   <div class="mx-auto flex h-14 max-w-screen-2xl items-center gap-4">
     <a href="/" aria-label="Home"><img src={favicon.src} alt="Phantom" class="size-6" /></a>
-    <Button color="outline" size="sm" class="ml-auto gap-24">
+    <Button color="ghost" size="sm" outline class="ml-auto gap-24">
       Search Documentation <Command value="⌘+K" />
     </Button>
     <Separator orientation="vertical" class="ml-1 h-3/5" />
     <div class="flex items-center gap-2">
       <Theme />
-      <Button color="ghost" size="icon"><Github /></Button>
+      <Link button href="https://github.com" aria-label="Source code" color="ghost" size="icon">
+        <Github aria-hidden />
+      </Link>
     </div>
   </div>
 </header>

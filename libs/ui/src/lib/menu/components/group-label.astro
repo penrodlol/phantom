@@ -1,0 +1,10 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'span'>;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div {...props} class={twMerge('text-foreground-2 select-none px-1 py-1', className)}><slot /></div>

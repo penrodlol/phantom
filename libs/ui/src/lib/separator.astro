@@ -6,12 +6,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 const variants = tv({
   base: 'shrink-0 rounded bg-[hsl(var(--border))]',
   defaultVariants: { orientation: 'horizontal' },
-  variants: {
-    orientation: {
-      horizontal: 'h-[1px] w-full',
-      vertical: 'h-full w-[1px]',
-    },
-  },
+  variants: { orientation: { horizontal: 'h-[1px] w-full', vertical: 'h-full w-[1px]' } },
 });
 
 type Props = HTMLAttributes<'div'> & VariantProps<typeof variants>;
