@@ -11,7 +11,7 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: { sans: ['Inter', ...theme.fontFamily.sans] },
+      fontFamily: { sans: ['SF Pro Display', ...theme.fontFamily.sans] },
       fontSize: {
         xs: 'var(--font-size-xs)',
         sm: 'var(--font-size-sm)',
@@ -65,6 +65,20 @@ export default {
     require('tailwindcss-animate'),
     require('tailwind-scrollbar')({ nocompatible: true }),
     plugin(({ addBase }) => {
+      const addFont = (src: string, weight: string) =>
+        addBase({
+          '@font-face': {
+            fontFamily: 'SF Pro Display',
+            src: `url("${src}") format("opentype")`,
+            fontWeight: weight,
+            fontStyle: 'normal',
+            fontDisplay: 'swap',
+          },
+        });
+      addFont('/SF-Pro-Display-Regular.otf', '400');
+      addFont('/SF-Pro-Display-Medium.otf', '500');
+      addFont('/SF-Pro-Display-Semibold.otf', '600');
+
       addBase({
         ':root': {
           '--font-size-xs': 'clamp(0.64rem, -0.09vw + 0.82rem, 0.64rem)',
