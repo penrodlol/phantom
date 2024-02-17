@@ -26,6 +26,7 @@ export default {
         'surface-1': 'hsl(var(--surface-1))',
         'surface-2': 'hsl(var(--surface-2))',
         'surface-3': 'hsl(var(--surface-3))',
+        'surface-backdrop': 'hsl(var(--surface-backdrop))',
         'surface-primary': 'hsl(var(--surface-primary))',
         'surface-secondary': 'hsl(var(--surface-secondary))',
         'surface-accent': 'hsl(var(--surface-accent))',
@@ -131,6 +132,8 @@ export default {
 
           '--border': '0 0% 60%',
           '--ring': '0 0% 10%',
+
+          '::backdrop': { '--surface-backdrop': '0 0% 20%' },
         },
         '[color-scheme="warm"]': {
           'color-scheme': 'light',
@@ -168,6 +171,8 @@ export default {
 
           '--border': '0 0% 60%',
           '--ring': '0 0% 10%',
+
+          '::backdrop': { '--surface-backdrop': '0 0% 20%' },
         },
         '[color-scheme="dark"]': {
           'color-scheme': 'dark',
@@ -205,6 +210,8 @@ export default {
 
           '--border': '0 0% 30%',
           '--ring': '0 0% 80%',
+
+          '::backdrop': { '--surface-backdrop': '0 0% 3%' },
         },
         '[color-scheme="dim"]': {
           'color-scheme': 'dark',
@@ -242,6 +249,8 @@ export default {
 
           '--border': '0 0% 30%',
           '--ring': '0 0% 70%',
+
+          '::backdrop': { '--surface-backdrop': '0 0% 3%' },
         },
       });
     }),

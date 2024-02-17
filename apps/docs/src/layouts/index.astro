@@ -1,12 +1,10 @@
 ---
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/800.css';
 import Footer from '@phantom/docs/components/footer.astro';
 import Header from '@phantom/docs/components/header.astro';
 import { ViewTransitions } from 'astro:transitions';
 ---
 
-<html lang="en" class="bg-surface-2 text-foreground-1 p-10" transition:animate="none">
+<html lang="en" class="bg-surface-2 text-foreground-1 lg:p-10" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -15,8 +13,8 @@ import { ViewTransitions } from 'astro:transitions';
     <title>Phantom UI</title>
     <ViewTransitions />
   </head>
-  <body class="bg-surface-1 rounded-xl border">
-    <div class="flex min-h-[calc(100vh-6.125rem)] flex-col">
+  <body class="bg-surface-1 lg:rounded-xl lg:border">
+    <div class="flex min-h-screen flex-col *:px-4 lg:min-h-[calc(100vh-6.125rem)] lg:*:px-8">
       <Header />
       <main class="flex-1"><slot /></main>
       <Footer />

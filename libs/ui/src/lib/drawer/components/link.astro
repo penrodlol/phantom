@@ -1,0 +1,11 @@
+---
+import type { ComponentProps } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+import LinkComponent from '../../link.astro';
+
+type Props = ComponentProps<typeof LinkComponent>;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<LinkComponent {...props} class={twMerge('px-8 py-1.5', className)}><slot /></LinkComponent>

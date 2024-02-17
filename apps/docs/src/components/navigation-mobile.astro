@@ -1,0 +1,39 @@
+---
+import Button from '@phantom/ui/button.astro';
+import * as Drawer from '@phantom/ui/drawer';
+import { getCollection } from 'astro:content';
+import { Menu } from 'lucide-astro';
+import favicon from '../../public/favicon.svg';
+
+const components = await getCollection('components');
+const active = Astro.url.pathname.split('/').pop();
+---
+
+<Drawer.Root position="right" class="w-3/4">
+  <Button slot="drawer-trigger" outline color="ghost" size="icon" aria-label="Navigation menu">
+    <Menu aria-hidden />
+  </Button>
+  <Drawer.Header class="border-b">
+    <Drawer.Title>
+      <a href="/" aria-label="Home" class="inline-flex items-center gap-4">
+        <img src={favicon.src} alt="Phantom" class="size-6" /> Phantom UI
+      </a>
+    </Drawer.Title>
+  </Drawer.Header>
+  <Drawer.Section>
+    <!-- TEMPORARY -->
+    <Drawer.Link href="/" active={false}>Getting Started</Drawer.Link>
+    <Drawer.Link href="/" active={false}>Installation</Drawer.Link>
+    <Drawer.Link href="/" active={false}>Changelog</Drawer.Link>
+  </Drawer.Section>
+  <Drawer.Section>
+    <Drawer.SectionTitle>Components</Drawer.SectionTitle>
+    {
+      components.map(({ slug, data }) => (
+        <Drawer.Link href={`/components/${slug}`} active={active === slug}>
+          {data.title}
+        </Drawer.Link>
+      ))
+    }
+  </Drawer.Section>
+</Drawer.Root>

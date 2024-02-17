@@ -3,58 +3,19 @@ import * as Breadcrumbs from '@phantom/ui/breadcrumbs';
 import Link from '@phantom/ui/link.astro';
 import Separator from '@phantom/ui/separator.astro';
 import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
 import { Home } from 'lucide-astro';
-import { twMerge } from 'tailwind-merge';
+import NavigationDesktop from '../components/navigation-desktop.astro';
 import Layout from './index.astro';
 
 type Props = CollectionEntry<'components'>;
 
 const { slug, data } = Astro.props;
-const components = await getCollection('components');
-const active = Astro.url.pathname.split('/').pop();
 ---
 
 <Layout>
-  <div class="mx-auto my-10 grid max-w-screen-2xl grid-cols-[20ch_1fr] gap-6">
-    <aside class="scrollbar-thin flex max-h-[calc(100vh-14rem)] flex-col gap-6 overflow-auto">
-      <div class="flex flex-col gap-2">
-        <h4>Overview</h4>
-        <ul class="text-sm">
-          <!-- TEMPORARY -->
-          <li class="text-foreground-2 px-4 py-1">Getting Started</li>
-          <li class="text-foreground-2 px-4 py-1">Installation</li>
-          <li class="text-foreground-2 px-4 py-1">Changelog</li>
-        </ul>
-      </div>
-      <div class="flex flex-col gap-2">
-        <h4>Components</h4>
-        <ul class="text-sm">
-          {
-            components.map(({ slug, data }) => (
-              <li class="relative">
-                {active === slug && (
-                  <div
-                    transition:name="active-component"
-                    class="bg-foreground-1 absolute inset-y-0 left-0 w-0.5 rounded"
-                  />
-                )}
-                <Link
-                  href={`/components/${slug}`}
-                  active={active === slug}
-                  class={twMerge(
-                    'flex items-center justify-between gap-2 px-4 py-1',
-                    'hover:text-foreground-1 motion-safe:transition-colors',
-                    active === slug ? 'text-foreground-1' : 'text-foreground-2',
-                  )}
-                >
-                  {data.title}
-                </Link>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+  <div class="mx-auto my-10 max-w-screen-2xl lg:grid lg:grid-cols-[18ch_1fr] lg:gap-6">
+    <aside class="scrollbar-thin hidden h-[calc(100vh-14rem)] overflow-auto lg:block">
+      <NavigationDesktop />
     </aside>
     <section class="flex flex-col gap-6 rounded border">
       <div class="bg-surface-2 flex justify-between gap-4 rounded-t border-b px-6 py-3">
@@ -68,8 +29,8 @@ const active = Astro.url.pathname.split('/').pop();
           <Link href={data.accessibility}>Accessibility</Link>
         </div>
       </div>
-      <div class="px-10">
-        <h1 class="text-xl font-bold">{data.title}</h1>
+      <div class="px-6 lg:px-10">
+        <h1 class="text-xl font-semibold">{data.title}</h1>
         <p class="text-foreground-2 max-w-prose">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione placeat earum
           praesentium quod aspernatur est sequi nisi non eius! Consequatur laborum quos.

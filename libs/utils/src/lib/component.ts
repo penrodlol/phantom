@@ -10,3 +10,8 @@ export function onInit<T extends OnInitDefaultElement>(
     document.querySelectorAll<T>(selector).forEach((component) => callback(component, event)),
   );
 }
+
+export function setOverflow(show: boolean, target = document.documentElement) {
+  if (show) target.style.removeProperty('overflow');
+  else target.style.setProperty('overflow', 'hidden');
+}
