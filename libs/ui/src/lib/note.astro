@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { Info } from 'lucide-astro';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'blockquote'>;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<blockquote
+  {...props}
+  class={twMerge(
+    'bg-surface-2 text-foreground-2 flex items-start gap-3 rounded px-4 py-2',
+    className,
+  )}
+>
+  <Info aria-hidden class="mt-1 size-4 shrink-0 opacity-80" />
+  <slot />
+</blockquote>

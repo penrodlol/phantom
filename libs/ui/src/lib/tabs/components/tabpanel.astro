@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'div'> & { value: string };
+
+const { class: className, value, ...props } = Astro.props;
+---
+
+<div
+  {...props}
+  role="tabpanel"
+  tabindex="0"
+  :id={`id+"-panel-${value}"`}
+  :aria-labelledby={`id+"-tab-${value}"`}
+  :aria-hidden={`active !== "${value}"`}
+  class={twMerge(
+    'mt-4 rounded focus-visible:outline-none focus-visible:ring-1 aria-hidden:hidden',
+    className,
+  )}
+>
+  <slot />
+</div>

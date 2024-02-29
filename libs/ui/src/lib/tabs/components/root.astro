@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'div'> & { defaultValue: string; type?: Type };
+export type Type = 'automatic' | 'manual';
+
+const { class: className, defaultValue, type, ...props } = Astro.props;
+---
+
+<div
+  {...props}
+  x-data={`{ id: "${crypto.randomUUID()}", active: "${defaultValue}", type: "${type ?? 'automatic'}" }`}
+  x-init="$el.classList.remove('opacity-0');"
+  class={twMerge('opacity-0', className)}
+>
+  <slot />
+</div>
