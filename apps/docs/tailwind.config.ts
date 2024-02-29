@@ -11,7 +11,7 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: { sans: ['SF Pro Display', ...theme.fontFamily.sans] },
+      fontFamily: { sans: ['SF Pro Text', ...theme.fontFamily.sans] },
       fontSize: {
         xs: 'var(--font-size-xs)',
         sm: 'var(--font-size-sm)',
@@ -31,9 +31,6 @@ export default {
         'surface-secondary': 'hsl(var(--surface-secondary))',
         'surface-accent': 'hsl(var(--surface-accent))',
         'surface-neutral': 'hsl(var(--surface-neutral))',
-        'surface-info': 'hsl(var(--surface-info))',
-        'surface-success': 'hsl(var(--surface-success))',
-        'surface-warning': 'hsl(var(--surface-warning))',
         'surface-danger': 'hsl(var(--surface-danger))',
         'foreground-1': 'hsl(var(--foreground-1))',
         'foreground-2': 'hsl(var(--foreground-2))',
@@ -45,12 +42,6 @@ export default {
         'foreground-accent-outline': 'hsl(var(--foreground-accent-outline))',
         'foreground-neutral': 'hsl(var(--foreground-neutral))',
         'foreground-neutral-outline': 'hsl(var(--foreground-neutral-outline))',
-        'foreground-info': 'hsl(var(--foreground-info))',
-        'foreground-info-outline': 'hsl(var(--foreground-info-outline))',
-        'foreground-success': 'hsl(var(--foreground-success))',
-        'foreground-success-outline': 'hsl(var(--foreground-success-outline))',
-        'foreground-warning': 'hsl(var(--foreground-warning))',
-        'foreground-warning-outline': 'hsl(var(--foreground-warning-outline))',
         'foreground-danger': 'hsl(var(--foreground-danger))',
         'foreground-danger-outline': 'hsl(var(--foreground-danger-outline))',
       },
@@ -69,16 +60,16 @@ export default {
       const addFont = (src: string, weight: string) =>
         addBase({
           '@font-face': {
-            fontFamily: 'SF Pro Display',
+            fontFamily: 'SF Pro Text',
             src: `url("${src}") format("opentype")`,
             fontWeight: weight,
             fontStyle: 'normal',
             fontDisplay: 'swap',
           },
         });
-      addFont('/SF-Pro-Display-Regular.otf', '400');
-      addFont('/SF-Pro-Display-Medium.otf', '500');
-      addFont('/SF-Pro-Display-Semibold.otf', '600');
+      addFont('/SF-Pro-Text-Regular.otf', '400');
+      addFont('/SF-Pro-Text-Medium.otf', '500');
+      addFont('/SF-Pro-Text-Semibold.otf', '600');
 
       addBase({
         ':root': {
@@ -99,19 +90,16 @@ export default {
         '[color-scheme="light"]': {
           'color-scheme': 'light',
 
-          '--surface-1': '0 0% 92%',
-          '--surface-2': '0 0% 88%',
-          '--surface-3': '0 0% 84%',
+          '--surface-1': '0 0% 90%',
+          '--surface-2': '0 0% 85%',
+          '--surface-3': '0 0% 80%',
           '--surface-primary': '0 0% 15%',
           '--surface-secondary': '0 0% 74%',
           '--surface-accent': '0 0% 74%',
           '--surface-neutral': '0 0% 74%',
-          '--surface-info': '225 25% 80%',
-          '--surface-success': '158 25% 75%',
-          '--surface-warning': '28 51% 75%',
           '--surface-danger': '356 51% 75%',
 
-          '--foreground-1': '0 0% 20%',
+          '--foreground-1': '0 0% 2%',
           '--foreground-2': '0 0% 45%',
           '--foreground-primary': '0 0% 92%',
           '--foreground-primary-outline': '0 0% 20%',
@@ -121,12 +109,6 @@ export default {
           '--foreground-accent-outline': '0 0% 20%',
           '--foreground-neutral': '0 0% 20%',
           '--foreground-neutral-outline': '0 0% 20%',
-          '--foreground-info': '0 0% 20%',
-          '--foreground-info-outline': '225 65% 23%',
-          '--foreground-success': '0 0% 20%',
-          '--foreground-success-outline': '158 65% 23%',
-          '--foreground-warning': '0 0% 10%',
-          '--foreground-warning-outline': '28 65% 23%',
           '--foreground-danger': '0 0% 10%',
           '--foreground-danger-outline': '356 65% 23%',
 
@@ -145,9 +127,6 @@ export default {
           '--surface-secondary': '0 0% 80%',
           '--surface-accent': '0 0% 80%',
           '--surface-neutral': '0 0% 80%',
-          '--surface-info': '225 25% 80%',
-          '--surface-success': '158 25% 75%',
-          '--surface-warning': '28 51% 75%',
           '--surface-danger': '356 51% 75%',
 
           '--foreground-1': '0 0% 20%',
@@ -160,12 +139,6 @@ export default {
           '--foreground-accent-outline': '0 0% 20%',
           '--foreground-neutral': '0 0% 20%',
           '--foreground-neutral-outline': '0 0% 20%',
-          '--foreground-info': '0 0% 20%',
-          '--foreground-info-outline': '225 65% 23%',
-          '--foreground-success': '0 0% 20%',
-          '--foreground-success-outline': '158 65% 23%',
-          '--foreground-warning': '0 0% 10%',
-          '--foreground-warning-outline': '28 65% 23%',
           '--foreground-danger': '0 0% 10%',
           '--foreground-danger-outline': '356 65% 23%',
 
@@ -177,16 +150,13 @@ export default {
         '[color-scheme="dark"]': {
           'color-scheme': 'dark',
 
-          '--surface-1': '0 0% 3%',
-          '--surface-2': '0 0% 7%',
-          '--surface-3': '0 0% 13%',
+          '--surface-1': '0 0% 2%',
+          '--surface-2': '0 0% 8%',
+          '--surface-3': '0 0% 14%',
           '--surface-primary': '0 0% 95%',
-          '--surface-secondary': '0 0% 25%',
-          '--surface-accent': '0 0% 25%',
-          '--surface-neutral': '0 0% 25%',
-          '--surface-info': '225 25% 30%',
-          '--surface-success': '158 25% 30%',
-          '--surface-warning': '28 41% 40%',
+          '--surface-secondary': '0 0% 22%',
+          '--surface-accent': '0 0% 22%',
+          '--surface-neutral': '0 0% 22%',
           '--surface-danger': '356 41% 30%',
 
           '--foreground-1': '0 0% 90%',
@@ -199,17 +169,23 @@ export default {
           '--foreground-accent-outline': '0 0% 80%',
           '--foreground-neutral': '0 0% 80%',
           '--foreground-neutral-outline': '0 0% 80%',
-          '--foreground-info': '0 0% 90%',
-          '--foreground-info-outline': '225 25% 60%',
-          '--foreground-success': '0 0% 90%',
-          '--foreground-success-outline': '158, 25%, 60%',
-          '--foreground-warning': '0 0% 96%',
-          '--foreground-warning-outline': '28 41% 60%',
           '--foreground-danger': '0 0% 96%',
           '--foreground-danger-outline': '356 41% 60%',
 
           '--border': '0 0% 30%',
           '--ring': '0 0% 80%',
+
+          '--astro-code-color-background': 'hsl(0 0% 2%)',
+          '--astro-code-color-text': 'hsl(0 0% 90%)',
+          '--astro-code-token-constant': 'hsl(0 0% 59%)',
+          '--astro-code-token-string': 'hsl(0 0% 70%)',
+          '--astro-code-token-comment': 'hsl(0 0% 31%)',
+          '--astro-code-token-keyword': 'hsl(0 0% 59%)',
+          '--astro-code-token-parameter': 'hsl(0 0% 90%)',
+          '--astro-code-token-function': 'hsl(0 0% 90%)',
+          '--astro-code-token-string-expression': 'hsl(0 0% 70%)',
+          '--astro-code-token-punctuation': 'hsl(0 0% 90%)',
+          '--astro-code-token-link': 'hsl(0 0% 59%)',
 
           '::backdrop': { '--surface-backdrop': '0 0% 3%' },
         },
@@ -223,9 +199,6 @@ export default {
           '--surface-secondary': '0 0% 25%',
           '--surface-accent': '0 0% 25%',
           '--surface-neutral': '0 0% 25%',
-          '--surface-info': '225 25% 30%',
-          '--surface-success': '158 25% 30%',
-          '--surface-warning': '28 41% 40%',
           '--surface-danger': '356 41% 30%',
 
           '--foreground-1': '0 0% 80%',
@@ -238,12 +211,6 @@ export default {
           '--foreground-accent-outline': '0 0% 70%',
           '--foreground-neutral': '0 0% 70%',
           '--foreground-neutral-outline': '0 0% 70%',
-          '--foreground-info': '0 0% 90%',
-          '--foreground-info-outline': '225 25% 60%',
-          '--foreground-success': '0 0% 90%',
-          '--foreground-success-outline': '158, 25%, 60%',
-          '--foreground-warning': '0 0% 96%',
-          '--foreground-warning-outline': '28 41% 60%',
           '--foreground-danger': '0 0% 96%',
           '--foreground-danger-outline': '356 41% 60%',
 

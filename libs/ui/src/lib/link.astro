@@ -1,30 +1,26 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { ArrowUpRight } from 'lucide-astro';
 import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
-import { variants as buttonVariants } from './button.astro';
+
+type Props = HTMLAttributes<'a'> & VariantProps<typeof variants>;
 
 const variants = tv({
   base: 'inline-flex items-center gap-1 rounded focus-visible:ring-1 focus-visible:outline-none',
+  defaultVariants: { active: true },
   variants: { active: { true: 'text-foreground-1', false: 'text-foreground-2' } },
 });
 
-type Props<T extends boolean | undefined> = HTMLAttributes<'a'> & { button?: T } & Variant<T>;
-type Variant<T extends boolean | undefined> = T extends true
-  ? VariantProps<typeof buttonVariants>
-  : VariantProps<typeof variants>;
-
-const { class: className, target, rel, button, ...props } = Astro.props;
-const internal = props.href?.toString().startsWith('/');
+const { class: className, href, target, rel, active, ...props } = Astro.props;
+const internal = /^\/|^#/.test(href?.toString() ?? '');
 ---
 
 <a
   {...props}
+  {href}
   target={target ?? (internal ? target : '_blank')}
   rel={rel ?? (internal ? rel : 'noopener noreferrer')}
-  class={twMerge(button ? buttonVariants(props) : variants(props), className)}
+  class={twMerge(variants({ active }), className)}
 >
   <slot />
-  {!button && !internal && <ArrowUpRight class="text-foreground-2 size-3" aria-hidden />}
 </a>

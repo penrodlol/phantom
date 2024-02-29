@@ -3,46 +3,40 @@ import type { HTMLAttributes } from 'astro/types';
 import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-export const variants = tv({
+type Props = HTMLAttributes<'button'> & VariantProps<typeof buttonVariants>;
+
+// prettier-ignore
+export const buttonVariants = tv({
   base:
-    'inline-flex items-center justify-center whitespace-nowrap rounded font-medium ' +
+    'inline-flex items-center justify-center gap-1 whitespace-nowrap rounded font-medium ' +
     'disabled:opacity-50 disabled:cursor-not-allowed ' +
     'focus-visible:ring-1 focus-visible:outline-none motion-safe:transition-colors',
   defaultVariants: { color: 'primary', size: 'md' },
   variants: {
     outline: { true: 'border [&:not(:hover)]:bg-transparent' },
     color: {
-      primary: 'bg-surface-primary text-foreground-primary hover:bg-surface-primary/80',
-      secondary: 'bg-surface-secondary text-foreground-secondary hover:bg-surface-secondary/80',
-      accent: 'bg-surface-accent text-foreground-accent hover:bg-surface-accent/80',
-      neutral: 'bg-surface-neutral text-foreground-neutral hover:bg-surface-neutral/80',
-      ghost: 'hover:bg-surface-neutral/50 hover:text-foreground-neutral',
-      info: 'bg-surface-info text-foreground-info hover:bg-surface-info/80',
-      success: 'bg-surface-success text-foreground-success hover:bg-surface-success/80',
-      warning: 'bg-surface-warning text-foreground-warning hover:bg-surface-warning/80',
-      danger: 'bg-surface-danger text-foreground-danger hover:bg-surface-danger/80',
+      primary: 'bg-surface-primary text-foreground-primary enabled:hover:bg-surface-primary/80',
+      secondary: 'bg-surface-secondary text-foreground-secondary enabled:hover:bg-surface-secondary/80',
+      accent: 'bg-surface-accent text-foreground-accent enabled:hover:bg-surface-accent/80',
+      neutral: 'bg-surface-neutral text-foreground-neutral enabled:hover:bg-surface-neutral/80',
+      ghost: 'hover:bg-surface-neutral/50 enabled:hover:text-foreground-neutral',
+      danger: 'bg-surface-danger text-foreground-danger enabled:hover:bg-surface-danger/80',
     },
     size: {
       sm: 'h-8 px-3 text-sm',
       md: 'h-9 px-4 text-base',
-      lg: 'h-10 px-8 text-lg',
+      lg: 'h-11 px-8 text-lg',
       icon: 'size-8 *:size-4',
     },
   },
-  // prettier-ignore
   compoundVariants: [
-    { outline: true, color: 'primary', class: 'border-surface-primary text-foreground-primary-outline hover:bg-surface-primary/20' },
-    { outline: true, color: 'secondary', class: 'border-surface-secondary text-foreground-secondary-outline hover:bg-surface-secondary/20' },
-    { outline: true, color: 'accent', class: 'border-surface-accent text-foreground-accent-outline hover:bg-surface-accent/20' },
-    { outline: true, color: 'neutral', class: 'border-surface-neutral text-foreground-neutral-outline hover:bg-surface-neutral/20' },
-    { outline: true, color: 'info', class: 'border-surface-info text-foreground-info-outline hover:bg-surface-info/20' },
-    { outline: true, color: 'success', class: 'border-surface-success text-foreground-success-outline hover:bg-surface-success/20' },
-    { outline: true, color: 'warning', class: 'border-surface-warning text-foreground-warning-outline hover:bg-surface-warning/20' },
-    { outline: true, color: 'danger', class: 'border-surface-danger text-foreground-danger-outline hover:bg-surface-danger/20' }, 
+    { outline: true, color: 'primary', class: 'border-surface-primary text-foreground-primary-outline enabled:hover:bg-surface-primary/20' },
+    { outline: true, color: 'secondary', class: 'border-surface-secondary text-foreground-secondary-outline enabled:hover:bg-surface-secondary/20' },
+    { outline: true, color: 'accent', class: 'border-surface-accent text-foreground-accent-outline enabled:hover:bg-surface-accent/20' },
+    { outline: true, color: 'neutral', class: 'border-surface-neutral text-foreground-neutral-outline enabled:hover:bg-surface-neutral/20' },
+    { outline: true, color: 'danger', class: 'border-surface-danger text-foreground-danger-outline enabled:hover:bg-surface-danger/20' }, 
   ],
 });
-
-type Props = HTMLAttributes<'button'> & VariantProps<typeof variants>;
 
 const { class: className, type, color, size, outline, ...props } = Astro.props;
 ---
@@ -50,7 +44,7 @@ const { class: className, type, color, size, outline, ...props } = Astro.props;
 <button
   {...props}
   type={type ?? 'button'}
-  class={twMerge(variants({ color, size, outline }), className)}
+  class={twMerge(buttonVariants({ color, size, outline }), className)}
 >
   <slot />
 </button>

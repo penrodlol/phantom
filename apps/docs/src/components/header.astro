@@ -1,5 +1,5 @@
 ---
-import Button from '@phantom/ui/button.astro';
+import Button, { buttonVariants } from '@phantom/ui/button.astro';
 import Command from '@phantom/ui/command.astro';
 import Link from '@phantom/ui/link.astro';
 import Separator from '@phantom/ui/separator.astro';
@@ -20,7 +20,11 @@ import Theme from './theme.astro';
       <Search />
     </Button>
     <Theme />
-    <Link button href="https://github.com" aria-label="Source code" color="ghost" size="icon">
+    <Link
+      href="https://github.com"
+      aria-label="Source code"
+      class={buttonVariants({ color: 'ghost', size: 'icon' })}
+    >
       <Github aria-hidden />
     </Link>
     <Separator orientation="vertical" class="ml-1 mr-2 h-3/5 lg:hidden" />
