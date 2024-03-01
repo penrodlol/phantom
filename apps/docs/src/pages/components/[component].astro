@@ -1,16 +1,23 @@
 ---
+import Heading from '@phantom/docs/components/heading.astro';
 import Layout from '@phantom/docs/layouts/components.astro';
+import Code from '@phantom/ui/code.astro';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const getStaticPaths = (async () => {
   const components = await getCollection('components');
   return components.map((props) => ({ params: { component: props.slug }, props }));
 }) satisfies GetStaticPaths;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 const component = Astro.props;
+const { Content } = await component.render();
 ---
 
-<Layout {...component} />
+<Layout {...component}>
+  <div class="flex flex-col gap-4">
+    <Content components={{ h2: Heading, figure: Code }} />
+  </div>
+</Layout>

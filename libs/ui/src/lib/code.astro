@@ -1,0 +1,44 @@
+---
+import type { ComponentProps, HTMLAttributes } from 'astro/types';
+import { Code as AstroCodeComponent } from 'astro:components';
+import { Check, Clipboard } from 'lucide-astro';
+import { twMerge } from 'tailwind-merge';
+import Button from './button.astro';
+
+type Props = HTMLAttributes<'figure'> & {
+  title?: string;
+  code?: ComponentProps<typeof AstroCodeComponent>['code'];
+  lang?: ComponentProps<typeof AstroCodeComponent>['lang'];
+};
+
+const { class: className, title, code, lang, ...props } = Astro.props;
+---
+
+<figure
+  {...props}
+  x-data="{ copied: false }"
+  class={twMerge(
+    'relative rounded border text-sm',
+    '[&_figcaption]:bg-surface-2 [&_figcaption]:rounded-t [&_figcaption]:border-b [&_figcaption]:px-4 [&_figcaption]:py-2',
+    '[&_code]:font-sans [&_code]:leading-relaxed [&_code]:[counter-reset:line] [&_pre]:rounded [&_pre]:p-4',
+    '[&_:where([data-line],.line)::before]:content-[counter(line)] [&_:where([data-line],.line)::before]:[counter-increment:line]',
+    '[&_:where([data-line],.line)::before]:mr-5 [&_:where([data-line],.line)::before]:w-6 [&_:where([data-line],.line)::before]:opacity-40',
+    className,
+  )}
+>
+  {title && <figcaption>{title}</figcaption>}
+  <Button
+    color="ghost"
+    size="icon"
+    aria-label="Copy to clipboard"
+    class="text-foreground-2 absolute right-0 top-px *:size-3.5"
+    @click="navigator.clipboard.writeText($root.lastElementChild.textContent.trim()).then(() => copied = true)"
+    @mouseleave.debounce.1000ms="copied && (copied = false)"
+  >
+    <Clipboard aria-hidden x-show="!copied" />
+    <Check aria-hidden x-show="copied" />
+  </Button>
+  <slot />
+  <!-- @ts-ignore -->
+  {code && <AstroCodeComponent {lang} {code} theme="css-variables" />}
+</figure>

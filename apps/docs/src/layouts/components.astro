@@ -1,9 +1,11 @@
 ---
+import { badgeVariants } from '@phantom/ui/badge.astro';
 import * as Breadcrumbs from '@phantom/ui/breadcrumbs';
 import Link from '@phantom/ui/link.astro';
 import Separator from '@phantom/ui/separator.astro';
 import type { CollectionEntry } from 'astro:content';
-import { Home } from 'lucide-astro';
+import { Eye, Github, Home } from 'lucide-astro';
+import { twJoin } from 'tailwind-merge';
 import NavigationDesktop from '../components/navigation-desktop.astro';
 import Layout from './index.astro';
 
@@ -13,7 +15,7 @@ const { slug, data } = Astro.props;
 ---
 
 <Layout>
-  <div class="mx-auto my-10 max-w-screen-2xl lg:grid lg:grid-cols-[18ch_1fr] lg:gap-6">
+  <div class="mx-auto my-10 max-w-screen-xl lg:grid lg:grid-cols-[14rem_1fr_10rem] lg:gap-6">
     <aside class="scrollbar-thin hidden h-[calc(100vh-14rem)] overflow-auto lg:block">
       <NavigationDesktop />
     </aside>
@@ -24,20 +26,28 @@ const { slug, data } = Astro.props;
           <Breadcrumbs.Item href="/components">Components</Breadcrumbs.Item>
           <Breadcrumbs.Item href={`/components/${slug}`}>{data.title}</Breadcrumbs.Item>
         </Breadcrumbs.Root>
-        <div class="flex items-center gap-4 text-sm">
-          <Link href={data.repo}>Source</Link>
-          <Link href={data.accessibility}>Accessibility</Link>
-        </div>
       </div>
       <div class="px-6 lg:px-10">
-        <h1 class="text-xl font-semibold">{data.title}</h1>
-        <p class="text-foreground-2 max-w-prose">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione placeat earum
-          praesentium quod aspernatur est sequi nisi non eius! Consequatur laborum quos.
-        </p>
-        <Separator class="mb-10 mt-6" />
-        <slot />
+        <h1
+          class={twJoin(
+            'text-xxl bg-clip-text font-semibold uppercase leading-none tracking-widest text-transparent',
+            'bg-[radial-gradient(hsl(var(--foreground-1))_1px,transparent_0)] bg-[size:2px_2px]',
+          )}
+        >
+          {data.title}
+        </h1>
+        <p class="text-foreground-2 max-w-prose">{data.description}</p>
+        <div class="mt-4 flex gap-4">
+          <Link href={data.repo} class={badgeVariants({ color: 'neutral' })}>
+            <Github aria-hidden class="size-3" />Source
+          </Link>
+          <Link href={data.accessibility} class={badgeVariants({ color: 'neutral' })}>
+            <Eye aria-hidden class="size-3" />Accessibility
+          </Link>
+        </div>
       </div>
+      <Separator class="mb-6 mt-3" />
+      <div class="px-6 pb-10 lg:px-10"><slot /></div>
     </section>
   </div>
 </Layout>
