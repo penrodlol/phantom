@@ -175,9 +175,9 @@ export default {
           '--border': '0 0% 30%',
           '--ring': '0 0% 80%',
 
-          '--astro-code-background': 'hsl(0 0% 2%)',
+          '--astro-code-background': 'hsl(0 0% 0%)',
           '--astro-code-foreground': 'hsl(0 0% 90%)',
-          '--astro-code-color-background': 'hsl(0 0% 2%)',
+          '--astro-code-color-background': 'hsl(0 0% 0%)',
           '--astro-code-color-text': 'hsl(0 0% 90%)',
           '--astro-code-token-constant': 'hsl(0 0% 59%)',
           '--astro-code-token-string': 'hsl(0 0% 70%)',

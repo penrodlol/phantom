@@ -1,5 +1,7 @@
 ---
+import Button from '@phantom/ui/button.astro';
 import type { HTMLAttributes } from 'astro/types';
+import { X } from 'lucide-astro';
 import { twMerge } from 'tailwind-merge';
 
 type Props = HTMLAttributes<'div'>;
@@ -7,4 +9,15 @@ type Props = HTMLAttributes<'div'>;
 const { class: className, ...props } = Astro.props;
 ---
 
-<div {...props} class={twMerge('flex flex-col p-6', className)}><slot /></div>
+<div {...props} class={twMerge('relative flex flex-col p-6', className)}>
+  <slot />
+  <Button
+    color="ghost"
+    size="icon"
+    aria-label="Close"
+    class="absolute right-2 top-0"
+    @click="open = false"
+  >
+    <X aria-hidden />
+  </Button>
+</div>

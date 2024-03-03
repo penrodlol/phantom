@@ -2,7 +2,6 @@
 import { badgeVariants } from '@phantom/ui/badge.astro';
 import * as Breadcrumbs from '@phantom/ui/breadcrumbs';
 import Link from '@phantom/ui/link.astro';
-import Separator from '@phantom/ui/separator.astro';
 import type { CollectionEntry } from 'astro:content';
 import { Eye, Github, Home } from 'lucide-astro';
 import { twJoin } from 'tailwind-merge';
@@ -11,43 +10,55 @@ import Layout from './index.astro';
 
 type Props = CollectionEntry<'components'>;
 
-const { slug, data } = Astro.props;
+const { slug, data, render } = Astro.props;
+const { headings } = await render();
 ---
 
-<Layout>
-  <div class="mx-auto my-10 max-w-screen-xl lg:grid lg:grid-cols-[14rem_1fr_10rem] lg:gap-6">
-    <aside class="scrollbar-thin hidden h-[calc(100vh-14rem)] overflow-auto lg:block">
-      <NavigationDesktop />
-    </aside>
-    <section class="flex flex-col gap-6 rounded border">
-      <div class="bg-surface-2 flex justify-between gap-4 rounded-t border-b px-6 py-3">
-        <Breadcrumbs.Root>
-          <Breadcrumbs.Item href="/" aria-label="Home"><Home size={16} /></Breadcrumbs.Item>
-          <Breadcrumbs.Item href="/components">Components</Breadcrumbs.Item>
-          <Breadcrumbs.Item href={`/components/${slug}`}>{data.title}</Breadcrumbs.Item>
-        </Breadcrumbs.Root>
+<Layout class="grid max-w-screen-xl gap-5 lg:grid-cols-[minmax(0,14rem)_1fr_max-content]">
+  <aside
+    class="scrollbar-thin sticky top-[calc(6rem+1px)] hidden h-[calc(100vh-9rem)] overflow-y-auto lg:block"
+  >
+    <NavigationDesktop />
+  </aside>
+  <section class="flex min-w-0 flex-col items-start gap-4 px-6 lg:px-10">
+    <Breadcrumbs.Root>
+      <Breadcrumbs.Item href="/" aria-label="Home"><Home size={16} /></Breadcrumbs.Item>
+      <Breadcrumbs.Item href="/components">Components</Breadcrumbs.Item>
+      <Breadcrumbs.Item href={`/components/${slug}`}>{data.title}</Breadcrumbs.Item>
+    </Breadcrumbs.Root>
+    <div class="mb-14">
+      <h1
+        class={twJoin(
+          'text-xxxl bg-clip-text font-semibold uppercase leading-none tracking-widest text-transparent',
+          'bg-[radial-gradient(hsl(var(--foreground-1))_1px,transparent_0)] bg-[size:2px_2px]',
+        )}
+      >
+        {data.title}
+      </h1>
+      <p class="text-foreground-2">{data.description}</p>
+      <div class="mt-6 flex gap-4">
+        <Link href={data.repo} class={badgeVariants({ color: 'neutral' })}>
+          <Github aria-hidden class="size-3" /> Source
+        </Link>
+        <Link href={data.accessibility} class={badgeVariants({ color: 'neutral' })}>
+          <Eye aria-hidden class="size-3" /> Accessibility
+        </Link>
       </div>
-      <div class="px-6 lg:px-10">
-        <h1
-          class={twJoin(
-            'text-xxl bg-clip-text font-semibold uppercase leading-none tracking-widest text-transparent',
-            'bg-[radial-gradient(hsl(var(--foreground-1))_1px,transparent_0)] bg-[size:2px_2px]',
-          )}
-        >
-          {data.title}
-        </h1>
-        <p class="text-foreground-2 max-w-prose">{data.description}</p>
-        <div class="mt-4 flex gap-4">
-          <Link href={data.repo} class={badgeVariants({ color: 'neutral' })}>
-            <Github aria-hidden class="size-3" />Source
-          </Link>
-          <Link href={data.accessibility} class={badgeVariants({ color: 'neutral' })}>
-            <Eye aria-hidden class="size-3" />Accessibility
-          </Link>
-        </div>
-      </div>
-      <Separator class="mb-6 mt-3" />
-      <div class="px-6 pb-10 lg:px-10"><slot /></div>
-    </section>
-  </div>
+    </div>
+    <slot />
+  </section>
+  <nav class="sticky top-[calc(6rem+1px)] hidden h-max lg:block">
+    <p class="mb-4 border-b pb-1 font-semibold">ON THIS PAGE</p>
+    <ul class="flex list-none flex-col gap-1 text-sm">
+      {
+        headings.map((heading) => (
+          <li>
+            <Link active={false} href={`#${heading.slug}`}>
+              {heading.text}
+            </Link>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </Layout>

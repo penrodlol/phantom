@@ -1,12 +1,24 @@
 ---
-import Footer from '@phantom/docs/components/footer.astro';
-import Header from '@phantom/docs/components/header.astro';
+import Button, { buttonVariants } from '@phantom/ui/button.astro';
+import Command from '@phantom/ui/command.astro';
+import Link from '@phantom/ui/link.astro';
+import Separator from '@phantom/ui/separator.astro';
+import type { HTMLAttributes } from 'astro/types';
 import { ViewTransitions } from 'astro:transitions';
+import { Github, Search } from 'lucide-astro';
+import { twMerge } from 'tailwind-merge';
+import favicon from '../../public/favicon.svg?raw';
+import NavigationMobile from '../components/navigation-mobile.astro';
+import Theme from '../components/theme.astro';
+
+type Props = HTMLAttributes<'main'>;
+
+const { class: className, ...props } = Astro.props;
 ---
 
 <html
   lang="en"
-  class="bg-surface-2 text-foreground-1 antialiased lg:p-10"
+  class="scrollbar-thin scroll-pt-24 antialiased [scrollbar-gutter:stable]"
   transition:animate="none"
 >
   <head>
@@ -17,11 +29,30 @@ import { ViewTransitions } from 'astro:transitions';
     <title>Phantom UI</title>
     <ViewTransitions />
   </head>
-  <body class="bg-surface-1 lg:rounded-xl lg:border">
-    <div class="flex min-h-screen flex-col *:px-4 lg:min-h-[calc(100vh-6.125rem)] lg:*:px-8">
-      <Header />
-      <main class="flex-1"><slot /></main>
-      <Footer />
-    </div>
+  <body class="text-foreground-1 bg-surface-1 flex min-h-screen flex-col *:px-4 lg:*:px-8">
+    <header class="bg-surface-1 sticky top-0 z-50 rounded-t-2xl border-b">
+      <div class="mx-auto flex h-14 max-w-screen-2xl items-center gap-2">
+        <a href="/" aria-label="Home" class="*:size-6" set:html={favicon} />
+        <Button color="ghost" size="sm" outline class="ml-auto hidden gap-24 lg:flex">
+          Search Documentation <Command value="⌘+K" />
+        </Button>
+        <Separator orientation="vertical" class="ml-4 mr-2 hidden h-3/5 lg:block" />
+        <Button color="ghost" size="icon" aria-label="Seach" class="ml-auto lg:hidden">
+          <Search />
+        </Button>
+        <Theme />
+        <Link
+          href={import.meta.env.SOURCE_CODE_URL}
+          aria-label="Source code"
+          class={buttonVariants({ color: 'ghost', size: 'icon' })}
+        >
+          <Github aria-hidden />
+        </Link>
+        <Separator orientation="vertical" class="ml-1 mr-2 h-3/5 lg:hidden" />
+        <div class="lg:hidden"><NavigationMobile /></div>
+      </div>
+    </header>
+    <main {...props} class={twMerge('mx-auto my-10 flex-1', className)}><slot /></main>
+    <footer></footer>
   </body>
 </html>

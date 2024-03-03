@@ -3,12 +3,12 @@ import type { HTMLAttributes } from 'astro/types';
 import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-type Props = HTMLAttributes<'a'> & VariantProps<typeof variants>;
+type Props = HTMLAttributes<'a'> & VariantProps<typeof linkVariants>;
 
-const variants = tv({
-  base: 'inline-flex items-center gap-1 rounded focus-visible:ring-1 focus-visible:outline-none',
+export const linkVariants = tv({
+  base: 'inline-flex items-center gap-1 rounded focus-visible:ring-1 focus-visible:outline-none motion-safe:transition-colors',
   defaultVariants: { active: true },
-  variants: { active: { true: 'text-foreground-1', false: 'text-foreground-2' } },
+  variants: { active: { true: 'text-foreground-1', false: '[&:not(:hover)]:text-foreground-2' } },
 });
 
 const { class: className, href, target, rel, active, ...props } = Astro.props;
@@ -20,7 +20,7 @@ const internal = /^\/|^#/.test(href?.toString() ?? '');
   {href}
   target={target ?? (internal ? target : '_blank')}
   rel={rel ?? (internal ? rel : 'noopener noreferrer')}
-  class={twMerge(variants({ active }), className)}
+  class={twMerge(linkVariants({ active }), className)}
 >
   <slot />
 </a>

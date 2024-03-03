@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 import { twMerge } from 'tailwind-merge';
 
-type Props = HTMLAttributes<'button'> & { value: string; default?: boolean };
+type Props = HTMLAttributes<'button'> & { value: string };
 
 const { class: className, value, ...props } = Astro.props;
 ---

@@ -3,25 +3,24 @@ import Button from '@phantom/ui/button.astro';
 import * as Drawer from '@phantom/ui/drawer';
 import { getCollection } from 'astro:content';
 import { Menu } from 'lucide-astro';
-import favicon from '../../public/favicon.svg';
+import favicon from '../../public/favicon.svg?raw';
 
 const components = await getCollection('components');
 const active = Astro.url.pathname.split('/').pop();
 ---
 
 <Drawer.Root position="right" class="w-3/4">
-  <Button slot="drawer-trigger" outline color="ghost" size="icon" aria-label="Navigation menu">
+  <Button slot="drawer-trigger" outline color="ghost" size="icon" aria-label="Navigation">
     <Menu aria-hidden />
   </Button>
   <Drawer.Header class="border-b">
     <Drawer.Title>
-      <a href="/" aria-label="Home" class="inline-flex items-center gap-4">
-        <img src={favicon.src} alt="Phantom" class="size-6" /> Phantom UI
+      <a href="/" aria-label="Home" class="flex items-center gap-4 [&_svg]:size-8">
+        <Fragment set:html={favicon} /> Phantom UI
       </a>
     </Drawer.Title>
   </Drawer.Header>
   <Drawer.Section>
-    <!-- TEMPORARY -->
     <Drawer.Link href="/" active={false}>Getting Started</Drawer.Link>
     <Drawer.Link href="/" active={false}>Installation</Drawer.Link>
     <Drawer.Link href="/" active={false}>Changelog</Drawer.Link>

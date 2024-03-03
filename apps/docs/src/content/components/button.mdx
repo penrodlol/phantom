@@ -7,10 +7,163 @@ accessibility: https://www.w3.org/WAI/ARIA/apg/patterns/button/
 ---
 
 import Installation from '@phantom/docs/components/installation.astro';
-import Code from '@phantom/ui/code.astro';
+import Showcase from '@phantom/docs/components/showcase.astro';
+import Button from '@phantom/ui/button.astro';
+import { Bell, Folder, Heart, Loader2, Mail, Pencil, Power, Settings, Trash } from 'lucide-astro';
 
 ## Installation
 
-Install the following dependencies:
+Install the following dependency:
 
 <Installation devDeps={['tailwind-variants']} />
+
+## Colors
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap justify-center gap-6">
+    <Button color="primary">Button</Button>
+    <Button color="secondary">Button</Button>
+    <Button color="accent">Button</Button>
+    <Button color="neutral">Button</Button>
+    <Button color="ghost">Button</Button>
+    <Button color="danger">Button</Button>
+  </div>
+  
+```astro
+---
+import Button from '@/components/ui/button.astro';
+---
+
+<Button color="primary">Button</Button>
+<Button color="secondary">Button</Button>
+<Button color="accent">Button</Button>
+<Button color="neutral">Button</Button>
+<Button color="ghost">Button</Button>
+<Button color="danger">Button</Button>
+```
+
+</Showcase>
+
+## Outline
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap justify-center gap-6">
+    <Button outline color="primary">Button</Button>
+    <Button outline color="secondary">Button</Button>
+    <Button outline color="accent">Button</Button>
+    <Button outline color="neutral">Button</Button>
+    <Button outline color="ghost">Button</Button>
+    <Button outline color="danger">Button</Button>
+  </div>
+
+```astro
+---
+import Button from '@/components/ui/button.astro';
+---
+
+<Button outline color="primary">Button</Button>
+<Button outline color="secondary">Button</Button>
+<Button outline color="accent">Button</Button>
+<Button outline color="neutral">Button</Button>
+<Button outline color="ghost">Button</Button>
+<Button outline color="danger">Button</Button>
+```
+
+</Showcase>
+
+## Sizes
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap gap-6 justify-center items-end">
+    <Button size="sm">Button</Button>
+    <Button size="md">Button</Button>
+    <Button size="lg">Button</Button>
+  </div>
+
+```astro
+---
+import Button from '@/components/ui/button.astro';
+---
+
+<Button size="sm">Button</Button>
+<Button size="md">Button</Button>
+<Button size="lg">Button</Button>
+```
+
+</Showcase>
+
+## Icon
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap gap-6 justify-center">
+    <Button color="primary" size="icon" aria-label="Heart"><Heart /></Button>
+    <Button color="secondary" size="icon" aria-label="Bell"><Bell /></Button>
+    <Button color="accent" size="icon" aria-label="Pencil"><Pencil /></Button>
+    <Button color="neutral" size="icon" aria-label="Settings"><Settings /></Button>
+    <Button color="ghost" size="icon" aria-label="Power"><Power /></Button>
+    <Button color="danger" size="icon" aria-label="Trash"><Trash /></Button>
+  </div>
+
+```astro
+---
+import Button from '@/components/ui/button.astro';
+import { Bell, Folder, Heart, Pencil, Power, Settings, Trash } from 'lucide-astro';
+---
+
+<Button color="primary" size="icon" aria-label="Heart"><Heart /></Button>
+<Button color="secondary" size="icon" aria-label="Bell"><Bell /></Button>
+<Button color="accent" size="icon" aria-label="Pencil"><Pencil /></Button>
+<Button color="neutral" size="icon" aria-label="Settings"><Settings /></Button>
+<Button color="ghost" size="icon" aria-label="Power"><Power /></Button>
+<Button color="danger" size="icon" aria-label="Trash"><Trash /></Button>
+```
+
+</Showcase>
+
+## Icon Outline
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap gap-6 justify-center">
+    <Button outline color="primary" size="icon" aria-label="Heart"><Heart /></Button>
+    <Button outline color="secondary" size="icon" aria-label="Bell"><Bell /></Button>
+    <Button outline color="accent" size="icon" aria-label="Pencil"><Pencil /></Button>
+    <Button outline color="neutral" size="icon" aria-label="Settings"><Settings /></Button>
+    <Button outline color="ghost" size="icon" aria-label="Power"><Power /></Button>
+    <Button outline color="danger" size="icon" aria-label="Trash"><Trash /></Button>
+  </div>
+
+```astro
+---
+import Button from '@/components/ui/button.astro';
+import { Bell, Folder, Heart, Pencil, Power, Settings, Trash } from 'lucide-astro';
+---
+
+<Button outline color="primary" size="icon" aria-label="Heart"><Heart /></Button>
+<Button outline color="secondary" size="icon" aria-label="Bell"><Bell /></Button>
+<Button outline color="accent" size="icon" aria-label="Pencil"><Pencil /></Button>
+<Button outline color="neutral" size="icon" aria-label="Settings"><Settings /></Button>
+<Button outline color="ghost" size="icon" aria-label="Power"><Power /></Button>
+<Button outline color="danger" size="icon" aria-label="Trash"><Trash /></Button>
+```
+
+</Showcase>
+
+## Text and Icon
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap gap-6 justify-center">
+    <Button><Mail class="size-4" /> Login with email</Button>
+    <Button disabled><Loader2 class="size-4 motion-safe:animate-spin" /> Loading</Button>
+  </div>
+
+```astro
+---
+import Button from '@/components/ui/button.astro';
+import { Loader2, Mail } from 'lucide-astro';
+---
+
+<Button><Mail class="size-4" /> Login with email</Button>
+<Button disabled><Loader2 class="size-4 motion-safe:animate-spin" /> Loading</Button>
+```
+
+</Showcase>

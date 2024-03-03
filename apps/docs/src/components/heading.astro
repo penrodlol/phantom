@@ -10,7 +10,7 @@ type Props = HTMLAttributes<'h2'>;
 const { class: className, ...props } = Astro.props;
 ---
 
-<div class="text-md mb-2 mt-8 flex flex-col gap-2 font-semibold uppercase first:mt-0">
+<div class="text-md flex-6 mb-2 mt-12 flex-col gap-2 font-semibold uppercase first:mt-0">
   <Link href={`#${props.id}`} class={twMerge('group flex max-w-max gap-1', className)}>
     <h2 {...props}><slot /></h2>
     <Hash

@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const variants = tv({
@@ -24,8 +23,15 @@ type Props = HTMLAttributes<'dialog'> & VariantProps<typeof variants>;
 const { class: className, position, ...props } = Astro.props;
 ---
 
-<script src="../script.ts"></script>
-
-<dialog {...props} data-drawer class={twMerge(variants({ position }), className)}><slot /></dialog>
+<dialog
+  {...props}
+  x-data="{ open: false }"
+  x-init="$el.nextElementSibling?.addEventListener('click', () => open = !open)"
+  x-effect="open ? ($el.showModal(), $setOverflow(false)) : ($el.close(), $setOverflow(true))"
+  @click="event.target === $el && (open = false)"
+  class={variants({ position, className })}
+>
+  <slot />
+</dialog>
 
 <slot name="drawer-trigger" />
