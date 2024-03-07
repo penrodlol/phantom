@@ -9,6 +9,7 @@ accessibility: https://www.w3.org/WAI/ARIA/apg/patterns/button/
 import Installation from '@phantom/docs/components/installation.astro';
 import Showcase from '@phantom/docs/components/showcase.astro';
 import Button from '@phantom/ui/button.astro';
+import Note from '@phantom/ui/note.astro';
 import { Bell, Folder, Heart, Loader2, Mail, Pencil, Power, Settings, Trash } from 'lucide-astro';
 
 ## Installation
@@ -18,6 +19,11 @@ Install the following dependency:
 <Installation devDeps={['tailwind-variants']} />
 
 ## Colors
+
+The `Button{:inline}` component color can be defined using the `color{:inline}` prop.
+
+Available colors: `primary{:inline}`, `secondary{:inline}`, `accent{:inline}`, `neutral{:inline}`,
+`ghost{:inline}`, and `danger{:inline}`.
 
 <Showcase>
   <div slot="example" class="flex flex-wrap justify-center gap-6">
@@ -46,6 +52,10 @@ import Button from '@/components/ui/button.astro';
 
 ## Outline
 
+The `Button{:inline}` component can be outlined using the `outline{:inline}` prop.
+
+Used in combination with the `color{:inline}` prop to define the outline and text color.
+
 <Showcase>
   <div slot="example" class="flex flex-wrap justify-center gap-6">
     <Button outline color="primary">Button</Button>
@@ -73,6 +83,10 @@ import Button from '@/components/ui/button.astro';
 
 ## Sizes
 
+The `Button{:inline}` component size can be defined using the `size{:inline}` prop.
+
+Available sizes: `sm{:inline}`, `md{:inline}`, `lg{:inline}`, `icon{:inline}`.
+
 <Showcase>
   <div slot="example" class="flex flex-wrap gap-6 justify-center items-end">
     <Button size="sm">Button</Button>
@@ -93,6 +107,16 @@ import Button from '@/components/ui/button.astro';
 </Showcase>
 
 ## Icon
+
+The `Button{:inline}` component can be defined as an icon when the `size` prop is set to
+`icon{:inline}`.
+
+The icon should be as a child of the `Button{:inline}` component.
+
+<Note title="Accessiblity" type="tip">
+  `aria-label{:inline}` is recommended when using icons as buttons. This ensures that screen readers
+  announce the purpose of the button.
+</Note>
 
 <Showcase>
   <div slot="example" class="flex flex-wrap gap-6 justify-center">
@@ -122,6 +146,9 @@ import { Bell, Folder, Heart, Pencil, Power, Settings, Trash } from 'lucide-astr
 
 ## Icon Outline
 
+The `Button{:inline}` component defined as an icon can be outlined using the `outline{:inline}`
+prop.
+
 <Showcase>
   <div slot="example" class="flex flex-wrap gap-6 justify-center">
     <Button outline color="primary" size="icon" aria-label="Heart"><Heart /></Button>
@@ -149,6 +176,8 @@ import { Bell, Folder, Heart, Pencil, Power, Settings, Trash } from 'lucide-astr
 </Showcase>
 
 ## Text and Icon
+
+The `Button{:inline}` component can be defined with text and an icon.
 
 <Showcase>
   <div slot="example" class="flex flex-wrap gap-6 justify-center">

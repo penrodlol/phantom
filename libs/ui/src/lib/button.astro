@@ -4,6 +4,8 @@ import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 type Props = HTMLAttributes<'button'> & VariantProps<typeof buttonVariants>;
+export type ButtonColor = NonNullable<Props['color']>;
+export type ButtonSize = NonNullable<Props['size']>;
 
 // prettier-ignore
 export const buttonVariants = tv({

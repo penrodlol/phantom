@@ -1,13 +1,20 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { twMerge } from 'tailwind-merge';
+import { twJoin, twMerge } from 'tailwind-merge';
 
 type Props = HTMLAttributes<'div'>;
 
 const { class: className, ...props } = Astro.props;
 ---
 
-<div {...props} class={twMerge('rounded border', className)}>
-  <div class="border-b p-8"><slot name="example" /></div>
+<div {...props} class={twMerge('mt-6 rounded border', className)}>
+  <div
+    class={twJoin(
+      'flex justify-center border-b bg-[size:5px_5px] p-8',
+      'bg-[radial-gradient(hsl(var(--surface-3)/0.75)_1px,transparent_0)]',
+    )}
+  >
+    <slot name="example" />
+  </div>
   <div class="*:border-0"><slot /></div>
 </div>

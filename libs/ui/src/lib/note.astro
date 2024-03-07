@@ -1,20 +1,20 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { Info } from 'lucide-astro';
+import { AlertOctagon, Info, Lightbulb } from 'lucide-astro';
 import { twMerge } from 'tailwind-merge';
 
-type Props = HTMLAttributes<'blockquote'>;
+type Props = HTMLAttributes<'aside'> & { title?: string; type?: Type };
+export type Type = 'note' | 'tip' | 'danger';
 
-const { class: className, ...props } = Astro.props;
+const { class: className, title, type = 'note', ...props } = Astro.props;
 ---
 
-<blockquote
-  {...props}
-  class={twMerge(
-    'bg-surface-2 text-foreground-2 flex items-start gap-3 rounded px-4 py-2',
-    className,
-  )}
->
-  <Info aria-hidden class="mt-1 size-4 shrink-0 opacity-80" />
-  <slot />
-</blockquote>
+<aside {...props} class={twMerge('bg-surface-2 rounded border border-l-8 px-4 py-2', className)}>
+  <p class="mb-2 flex items-center gap-2 font-medium capitalize tracking-wide" aria-hidden="true">
+    {type === 'note' && <Info class="size-4 shrink-0" />}
+    {type === 'tip' && <Lightbulb class="size-4 shrink-0" />}
+    {type === 'danger' && <AlertOctagon class="size-4 shrink-0" />}
+    {title ?? type}
+  </p>
+  <section class="text-foreground-1"><slot /></section>
+</aside>

@@ -3,7 +3,7 @@ import type { ComponentProps, HTMLAttributes } from 'astro/types';
 import { Code as AstroCodeComponent } from 'astro:components';
 import { Check, Clipboard } from 'lucide-astro';
 import { twMerge } from 'tailwind-merge';
-import Button from './button.astro';
+import Button from '../../button.astro';
 
 type Props = HTMLAttributes<'figure'> & {
   title?: string;
@@ -18,9 +18,9 @@ const { class: className, title, code, lang, ...props } = Astro.props;
   {...props}
   x-data="{ copied: false }"
   class={twMerge(
-    'relative rounded border text-sm',
+    'relative grid rounded border text-sm',
     '[&_figcaption]:bg-surface-2 [&_figcaption]:rounded-t [&_figcaption]:border-b [&_figcaption]:px-4 [&_figcaption]:py-2',
-    '[&_code]:font-sans [&_code]:leading-relaxed [&_pre]:overflow-x-auto [&_pre]:rounded [&_pre]:p-4',
+    '[&_code]:font-sans [&_code]:text-sm [&_pre]:overflow-auto [&_pre]:rounded [&_pre]:p-4',
     className,
   )}
 >

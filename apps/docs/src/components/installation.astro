@@ -1,5 +1,5 @@
 ---
-import Code from '@phantom/ui/code.astro';
+import * as Code from '@phantom/ui/code';
 import * as Tabs from '@phantom/ui/tabs';
 
 type Props = { deps?: Array<string>; devDeps?: Array<string> };
@@ -15,15 +15,15 @@ const devDeps = Astro.props.devDeps?.join(' ');
     <Tabs.Tab value="pnpm">pnpm</Tabs.Tab>
   </Tabs.TabList>
   <Tabs.TabPanel value="npm">
-    {deps && <Code lang="bash" code={`npm install ${deps}`} />}
-    {devDeps && <Code lang="bash" code={`npm install -D ${devDeps}`} />}
+    {deps && <Code.Block lang="bash" code={`npm install ${deps}`} />}
+    {devDeps && <Code.Block lang="bash" code={`npm install -D ${devDeps}`} />}
   </Tabs.TabPanel>
   <Tabs.TabPanel value="yarn">
-    {deps && <Code lang="bash" code={`yarn add ${deps}`} />}
-    {devDeps && <Code lang="bash" code={`yarn add -D ${devDeps}`} />}
+    {deps && <Code.Block lang="bash" code={`yarn add ${deps}`} />}
+    {devDeps && <Code.Block lang="bash" code={`yarn add -D ${devDeps}`} />}
   </Tabs.TabPanel>
   <Tabs.TabPanel value="pnpm">
-    {deps && <Code lang="bash" code={`pnpm add ${deps}`} />}
-    {devDeps && <Code lang="bash" code={`pnpm add -D ${devDeps}`} />}
+    {deps && <Code.Block lang="bash" code={`pnpm add ${deps}`} />}
+    {devDeps && <Code.Block lang="bash" code={`pnpm add -D ${devDeps}`} />}
   </Tabs.TabPanel>
 </Tabs.Root>
