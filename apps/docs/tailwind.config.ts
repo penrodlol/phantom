@@ -159,7 +159,7 @@ export default {
           '--surface-neutral': '0 0% 22%',
           '--surface-danger': '356 41% 30%',
 
-          '--foreground-1': '0 0% 90%',
+          '--foreground-1': '0 0% 80%',
           '--foreground-2': '0 0% 55%',
           '--foreground-primary': '0 0% 4%',
           '--foreground-primary-outline': '0 0% 95%',

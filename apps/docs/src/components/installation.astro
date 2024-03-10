@@ -1,5 +1,6 @@
 ---
 import * as Code from '@phantom/ui/code';
+import * as Stepper from '@phantom/ui/stepper';
 import * as Tabs from '@phantom/ui/tabs';
 
 type Props = { deps?: Array<string>; devDeps?: Array<string> };
@@ -8,22 +9,31 @@ const deps = Astro.props.deps?.join(' ');
 const devDeps = Astro.props.devDeps?.join(' ');
 ---
 
-<Tabs.Root defaultValue="npm">
-  <Tabs.TabList aria-label="Installation tabs">
-    <Tabs.Tab value="npm">npm</Tabs.Tab>
-    <Tabs.Tab value="yarn">yarn</Tabs.Tab>
-    <Tabs.Tab value="pnpm">pnpm</Tabs.Tab>
-  </Tabs.TabList>
-  <Tabs.TabPanel value="npm">
-    {deps && <Code.Block lang="bash" code={`npm install ${deps}`} />}
-    {devDeps && <Code.Block lang="bash" code={`npm install -D ${devDeps}`} />}
-  </Tabs.TabPanel>
-  <Tabs.TabPanel value="yarn">
-    {deps && <Code.Block lang="bash" code={`yarn add ${deps}`} />}
-    {devDeps && <Code.Block lang="bash" code={`yarn add -D ${devDeps}`} />}
-  </Tabs.TabPanel>
-  <Tabs.TabPanel value="pnpm">
-    {deps && <Code.Block lang="bash" code={`pnpm add ${deps}`} />}
-    {devDeps && <Code.Block lang="bash" code={`pnpm add -D ${devDeps}`} />}
-  </Tabs.TabPanel>
-</Tabs.Root>
+<Stepper.Root>
+  <Stepper.Step>
+    <Stepper.StepLabel>Install dependencies</Stepper.StepLabel>
+    <Tabs.Root defaultValue="npm">
+      <Tabs.TabList aria-label="Installation tabs">
+        <Tabs.Tab value="npm">npm</Tabs.Tab>
+        <Tabs.Tab value="yarn">yarn</Tabs.Tab>
+        <Tabs.Tab value="pnpm">pnpm</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="npm">
+        {deps && <Code.Block lang="bash" code={`npm install ${deps}`} />}
+        {devDeps && <Code.Block lang="bash" code={`npm install -D ${devDeps}`} />}
+      </Tabs.TabPanel>
+      <Tabs.TabPanel value="yarn">
+        {deps && <Code.Block lang="bash" code={`yarn add ${deps}`} />}
+        {devDeps && <Code.Block lang="bash" code={`yarn add -D ${devDeps}`} />}
+      </Tabs.TabPanel>
+      <Tabs.TabPanel value="pnpm">
+        {deps && <Code.Block lang="bash" code={`pnpm add ${deps}`} />}
+        {devDeps && <Code.Block lang="bash" code={`pnpm add -D ${devDeps}`} />}
+      </Tabs.TabPanel>
+    </Tabs.Root>
+  </Stepper.Step>
+  <Stepper.Step>
+    <Stepper.StepLabel>Copy the source code</Stepper.StepLabel>
+    <div class="scrollbar-thin [&_pre]:max-h-[500px]"><slot /></div>
+  </Stepper.Step>
+</Stepper.Root>

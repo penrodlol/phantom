@@ -20,7 +20,7 @@ const { class: className, title, code, lang, ...props } = Astro.props;
   class={twMerge(
     'relative grid rounded border text-sm',
     '[&_figcaption]:bg-surface-2 [&_figcaption]:rounded-t [&_figcaption]:border-b [&_figcaption]:px-4 [&_figcaption]:py-2',
-    '[&_code]:font-sans [&_code]:text-sm [&_pre]:overflow-auto [&_pre]:rounded [&_pre]:p-4',
+    '[&_pre]:scrollbar-thin [&_code]:font-sans [&_code]:text-sm [&_pre]:overflow-auto [&_pre]:rounded [&_pre]:p-4',
     className,
   )}
 >

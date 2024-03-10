@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'div'>;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div
+  {...props}
+  class={twMerge(
+    'flex flex-col gap-4 border-l pb-10 pl-8 last-of-type:pb-0',
+    'last-of-type:[border-image:linear-gradient(hsl(var(--border))_80%,transparent)_20]',
+    className,
+  )}
+>
+  <slot />
+</div>
