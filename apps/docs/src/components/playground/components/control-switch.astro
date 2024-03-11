@@ -1,0 +1,16 @@
+---
+import Label from '@phantom/ui/label.astro';
+import Switch from '@phantom/ui/switch.astro';
+import type { ComponentProps } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+type Props = ComponentProps<typeof Switch>;
+
+const { class: className, name, ...props } = Astro.props;
+---
+
+<div class={twMerge('flex items-center', className)}>
+  <!-- @ts-ignore -->
+  <Switch {...props} {name} id=`playground-${name}` />
+  <Label for=`playground-${name}` class="pl-3 capitalize">{name}</Label>
+</div>

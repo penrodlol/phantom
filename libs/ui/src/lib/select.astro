@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { ChevronsUpDown } from 'lucide-astro';
+import { twJoin, twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'select'>;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div class={twMerge('relative flex h-8 rounded border', className)}>
+  <select
+    {...props}
+    class={twJoin(
+      'bg-surface-1 size-full cursor-pointer appearance-none rounded px-3 py-1',
+      'focus-visible:outline-none focus-visible:ring-1',
+    )}
+  >
+    <slot />
+  </select>
+  <ChevronsUpDown
+    aria-hidden
+    class="text-foreground-2 pointer-events-none absolute right-3 top-1/2 size-3.5 shrink-0 -translate-y-1/2"
+  />
+</div>

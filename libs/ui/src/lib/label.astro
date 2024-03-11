@@ -1,0 +1,10 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'label'>;
+
+const { class: className, id, ...props } = Astro.props;
+---
+
+<label {...props} class={twMerge('cursor-pointer select-none', className)}><slot /></label>

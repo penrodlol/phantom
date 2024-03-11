@@ -1,0 +1,46 @@
+---
+export const partial = true;
+
+import * as Playground from '@phantom/docs/components/playground';
+import Component from '@phantom/ui/button.astro';
+import * as Code from '@phantom/ui/code';
+import { Heart, Loader2 } from 'lucide-astro';
+import { createForm } from 'simple:form';
+
+const form = createForm({
+  color: Playground.colorSchema,
+  size: Playground.sizeSchema,
+  outline: Playground.switchSchema,
+  icon: Playground.switchSchema,
+  disabled: Playground.switchSchema,
+  loading: Playground.switchSchema,
+});
+
+const formData = (await Astro.locals.form.getData(form))?.data ?? {};
+const { color = 'primary', size = 'md', outline, icon, disabled, loading } = formData;
+
+const code = `
+${Playground.buildImports([{ files: 'Button', path: '@/components/ui/button.astro' }])}
+<Button ${Playground.buildProps({ color, size: icon ? 'icon' : size, outline, disabled })}>
+  ${loading && !icon ? '<Loader2 aria-hidden class="size-4 motion-safe:animate-spin" /> ' : ''}${icon ? '<Heart aria-hidden />' : 'Button'}
+</Button>
+`;
+---
+
+<Playground.Root component="button">
+  <Component slot="preview" {disabled} {color} {outline} size={icon ? 'icon' : size}>
+    {loading && !icon && <Loader2 aria-hidden class="size-4 motion-safe:animate-spin" />}
+    {icon ? <Heart aria-hidden /> : 'Button'}
+  </Component>
+
+  <Fragment slot="controls">
+    <Playground.ControlColor name={form.inputProps.color.name} selected={color} />
+    <Playground.ControlSize name={form.inputProps.size.name} selected={size} />
+    <Playground.ControlSwitch name={form.inputProps.outline.name} checked={outline} />
+    <Playground.ControlSwitch name={form.inputProps.disabled.name} checked={disabled} />
+    <Playground.ControlSwitch name={form.inputProps.icon.name} checked={icon} />
+    <Playground.ControlSwitch name={form.inputProps.loading.name} checked={loading} />
+  </Fragment>
+
+  <Code.Block slot="code" lang="astro" code={code.trim()} />
+</Playground.Root>

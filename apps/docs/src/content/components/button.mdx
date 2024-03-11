@@ -8,15 +8,20 @@ accessibility: https://www.w3.org/WAI/ARIA/apg/patterns/button/
 
 import Installation from '@phantom/docs/components/installation.astro';
 import Showcase from '@phantom/docs/components/showcase.astro';
-import Button from '@phantom/ui/button.astro';
+import Playground from '@phantom/docs/pages/components/playground/button.astro';
+import Button, { buttonVariants } from '@phantom/ui/button.astro';
+import SourceCode from '@phantom/ui/button.astro?raw';
+import * as Code from '@phantom/ui/code';
 import Note from '@phantom/ui/note.astro';
 import { Bell, Folder, Heart, Loader2, Mail, Pencil, Power, Settings, Trash } from 'lucide-astro';
 
+<Playground />
+
 ## Installation
 
-Install the following dependency:
-
-<Installation devDeps={['tailwind-variants']} />
+<Installation devDeps={['tailwind-variants']}>
+  <Code.Block title="components/ui/button.astro" lang="astro" code={SourceCode} />
+</Installation>
 
 ## Colors
 
@@ -113,7 +118,7 @@ The `Button{:inline}` component can be defined as an icon when the `size` prop i
 
 The icon should be as a child of the `Button{:inline}` component.
 
-<Note title="Accessiblity" type="tip">
+<Note title="Accessibility Tip" type="tip">
   `aria-label{:inline}` is recommended when using icons as buttons. This ensures that screen readers
   announce the purpose of the button.
 </Note>
@@ -193,6 +198,24 @@ import { Loader2, Mail } from 'lucide-astro';
 
 <Button><Mail class="size-4" /> Login with email</Button>
 <Button disabled><Loader2 class="size-4 motion-safe:animate-spin" /> Loading</Button>
+```
+
+</Showcase>
+
+## Link
+
+The `Button{:inline}` component can be defined as a link. This is done by applying `buttonVariants`
+function to an anchor element.
+
+<Showcase>
+<a slot="example" href="#link" class={buttonVariants({ color: 'primary', size: 'md' })}>Link</a>
+
+```astro
+---
+import { buttonVariants } from '@/components/ui/button.astro';
+---
+
+<a href="#link" class={buttonVariants({ color: 'primary', size: 'md' })}>Link</a>
 ```
 
 </Showcase>
