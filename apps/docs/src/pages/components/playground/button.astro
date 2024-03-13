@@ -16,8 +16,8 @@ const form = createForm({
   loading: Playground.switchSchema,
 });
 
-const formData = (await Astro.locals.form.getData(form))?.data ?? {};
-const { color = 'primary', size = 'md', outline, icon, disabled, loading } = formData;
+const formData = await Astro.locals.form.getData(form);
+const { color = 'primary', size = 'md', outline, icon, disabled, loading } = formData?.data ?? {};
 
 const code = `
 ${Playground.buildImports([{ files: 'Button', path: '@/components/ui/button.astro' }])}

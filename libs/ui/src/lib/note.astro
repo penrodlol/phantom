@@ -3,18 +3,23 @@ import type { HTMLAttributes } from 'astro/types';
 import { AlertOctagon, Info, Lightbulb } from 'lucide-astro';
 import { twMerge } from 'tailwind-merge';
 
-type Props = HTMLAttributes<'aside'> & { title?: string; type?: Type };
-export type Type = 'note' | 'tip' | 'danger';
+type Props = HTMLAttributes<'aside'> & { type?: Type; title?: string | undefined };
+export type Type = 'info' | 'tip' | 'danger';
 
-const { class: className, title, type = 'note', ...props } = Astro.props;
+const id = crypto.randomUUID();
+const { class: className, type = 'info', title, ...props } = Astro.props;
 ---
 
-<aside {...props} class={twMerge('bg-surface-2 rounded border border-l-8 px-4 py-2', className)}>
-  <p class="mb-2 flex items-center gap-2 font-medium capitalize tracking-wide" aria-hidden="true">
-    {type === 'note' && <Info class="size-4 shrink-0" />}
-    {type === 'tip' && <Lightbulb class="size-4 shrink-0" />}
-    {type === 'danger' && <AlertOctagon class="size-4 shrink-0" />}
-    {title ?? type}
-  </p>
-  <section class="text-foreground-1"><slot /></section>
+<aside
+  {...props}
+  aria-labelledby={id}
+  class={twMerge('bg-surface-2 flex flex-col gap-2 rounded border border-l-8 px-4 py-3', className)}
+>
+  <h4 {id} class="flex items-center gap-2 font-semibold tracking-wide">
+    {type === 'info' && <Info class="text-foreground-2 size-4 shrink-0" />}
+    {type === 'tip' && <Lightbulb class="text-foreground-2 size-4 shrink-0" />}
+    {type === 'danger' && <AlertOctagon class="text-foreground-2 size-4 shrink-0" />}
+    {title}
+  </h4>
+  <section class="text-foreground-2 text-sm"><slot /></section>
 </aside>

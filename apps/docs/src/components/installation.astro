@@ -18,15 +18,15 @@ const devDeps = Astro.props.devDeps?.join(' ');
         <Tabs.Tab value="yarn">yarn</Tabs.Tab>
         <Tabs.Tab value="pnpm">pnpm</Tabs.Tab>
       </Tabs.TabList>
-      <Tabs.TabPanel value="npm">
+      <Tabs.TabPanel value="npm" class="flex flex-col gap-4">
         {deps && <Code.Block lang="bash" code={`npm install ${deps}`} />}
         {devDeps && <Code.Block lang="bash" code={`npm install -D ${devDeps}`} />}
       </Tabs.TabPanel>
-      <Tabs.TabPanel value="yarn">
+      <Tabs.TabPanel value="yarn" class="flex flex-col gap-4">
         {deps && <Code.Block lang="bash" code={`yarn add ${deps}`} />}
         {devDeps && <Code.Block lang="bash" code={`yarn add -D ${devDeps}`} />}
       </Tabs.TabPanel>
-      <Tabs.TabPanel value="pnpm">
+      <Tabs.TabPanel value="pnpm" class="flex flex-col gap-4">
         {deps && <Code.Block lang="bash" code={`pnpm add ${deps}`} />}
         {devDeps && <Code.Block lang="bash" code={`pnpm add -D ${devDeps}`} />}
       </Tabs.TabPanel>
