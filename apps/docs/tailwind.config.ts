@@ -31,6 +31,7 @@ export default {
         'surface-secondary': 'hsl(var(--surface-secondary))',
         'surface-accent': 'hsl(var(--surface-accent))',
         'surface-neutral': 'hsl(var(--surface-neutral))',
+        'surface-warning': 'hsl(var(--surface-warning))',
         'surface-danger': 'hsl(var(--surface-danger))',
         'foreground-1': 'hsl(var(--foreground-1))',
         'foreground-2': 'hsl(var(--foreground-2))',
@@ -42,6 +43,8 @@ export default {
         'foreground-accent-outline': 'hsl(var(--foreground-accent-outline))',
         'foreground-neutral': 'hsl(var(--foreground-neutral))',
         'foreground-neutral-outline': 'hsl(var(--foreground-neutral-outline))',
+        'foreground-warning': 'hsl(var(--foreground-warning))',
+        'foreground-warning-outline': 'hsl(var(--foreground-warning-outline))',
         'foreground-danger': 'hsl(var(--foreground-danger))',
         'foreground-danger-outline': 'hsl(var(--foreground-danger-outline))',
       },
@@ -97,10 +100,11 @@ export default {
           '--surface-secondary': '0 0% 74%',
           '--surface-accent': '0 0% 74%',
           '--surface-neutral': '0 0% 74%',
+          '--surface-warning': '',
           '--surface-danger': '356 51% 75%',
 
           '--foreground-1': '0 0% 2%',
-          '--foreground-2': '0 0% 45%',
+          '--foreground-2': '0 0% 30%',
           '--foreground-primary': '0 0% 92%',
           '--foreground-primary-outline': '0 0% 20%',
           '--foreground-secondary': '0 0% 20%',
@@ -109,6 +113,8 @@ export default {
           '--foreground-accent-outline': '0 0% 20%',
           '--foreground-neutral': '0 0% 20%',
           '--foreground-neutral-outline': '0 0% 20%',
+          '--foreground-warning': '',
+          '--foreground-warning-outline': '',
           '--foreground-danger': '0 0% 10%',
           '--foreground-danger-outline': '356 65% 23%',
 
@@ -127,6 +133,7 @@ export default {
           '--surface-secondary': '0 0% 80%',
           '--surface-accent': '0 0% 80%',
           '--surface-neutral': '0 0% 80%',
+          '--surface-warning': '',
           '--surface-danger': '356 51% 75%',
 
           '--foreground-1': '0 0% 20%',
@@ -139,6 +146,8 @@ export default {
           '--foreground-accent-outline': '0 0% 20%',
           '--foreground-neutral': '0 0% 20%',
           '--foreground-neutral-outline': '0 0% 20%',
+          '--foreground-warning': '',
+          '--foreground-warning-outline': '',
           '--foreground-danger': '0 0% 10%',
           '--foreground-danger-outline': '356 65% 23%',
 
@@ -157,6 +166,7 @@ export default {
           '--surface-secondary': '0 0% 22%',
           '--surface-accent': '0 0% 22%',
           '--surface-neutral': '0 0% 22%',
+          '--surface-warning': '32 81% 29%',
           '--surface-danger': '356 41% 30%',
 
           '--foreground-1': '0 0% 80%',
@@ -169,6 +179,8 @@ export default {
           '--foreground-accent-outline': '0 0% 80%',
           '--foreground-neutral': '0 0% 80%',
           '--foreground-neutral-outline': '0 0% 80%',
+          '--foreground-warning': '0 0% 80%',
+          '--foreground-warning-outline': '45 93% 47%',
           '--foreground-danger': '0 0% 96%',
           '--foreground-danger-outline': '356 41% 60%',
 
@@ -201,6 +213,7 @@ export default {
           '--surface-secondary': '0 0% 25%',
           '--surface-accent': '0 0% 25%',
           '--surface-neutral': '0 0% 25%',
+          '--surface-warning': '',
           '--surface-danger': '356 41% 30%',
 
           '--foreground-1': '0 0% 80%',
@@ -213,6 +226,8 @@ export default {
           '--foreground-accent-outline': '0 0% 70%',
           '--foreground-neutral': '0 0% 70%',
           '--foreground-neutral-outline': '0 0% 70%',
+          '--foreground-warning': '',
+          '--foreground-warning-outline': '',
           '--foreground-danger': '0 0% 96%',
           '--foreground-danger-outline': '356 41% 60%',
 

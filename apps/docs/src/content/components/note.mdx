@@ -1,7 +1,96 @@
 ---
 title: Note
-description: ''
+description: An element that provides additional information for the main content of a page.
 draft: true
 repo: https://github.com
-accessibility: https://github.com
+accessibility: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/complementary.html
 ---
+
+import Installation from '@phantom/docs/components/installation.astro';
+import Showcase from '@phantom/docs/components/showcase.astro';
+import Playground from '@phantom/docs/pages/components/playground/note.astro';
+import * as Code from '@phantom/ui/code';
+import Note from '@phantom/ui/note.astro';
+import SourceCode from '@phantom/ui/note.astro?raw';
+
+<Playground />
+
+## Installation
+
+<Installation deps={['lucide-astro']} devDeps={['tailwind-merge']}>
+  <Code.Block title="components/ui/note.astro" lang="astro" code={SourceCode} />
+</Installation>
+
+## Type
+
+The `Note{:inline}` component type can be defined using the `type{:inline}` prop.
+
+Available types: `info{:inline}`, `tip{:inline}`, `warning{:inline}`, and `danger{:inline}`.
+
+<Showcase>
+  <div slot="example" class="flex flex-col gap-6 w-full">
+    <Note type="info">This is an info note.</Note>
+    <Note type="tip">This is a tip note.</Note>
+    <Note type="warning">This is a warning note.</Note>
+    <Note type="danger">This is a danger note.</Note>
+  </div>
+
+```astro
+---
+import Note from '@/components/ui/note.astro';
+---
+
+<Note type="info">This is an info note.</Note>
+<Note type="tip">This is a tip note.</Note>
+<Note type="warning">This is a warning note.</Note>
+<Note type="danger">This is a danger note.</Note>
+```
+
+</Showcase>
+
+## Title
+
+The `Note{:inline}` component title can be defined using the `title{:inline}` prop.
+
+<Showcase>
+  <div slot="example" class="flex flex-col gap-6 w-full">
+    <Note type="info" title="Info">This is an info note.</Note>
+    <Note type="tip" title="Tip">This is a tip note.</Note>
+    <Note type="warning" title="Warning">This is a warning note.</Note>
+    <Note type="danger" title="Danger">This is a danger note.</Note>
+  </div>
+
+```astro
+---
+import Note from '@/components/ui/note.astro';
+---
+
+<Note type="info" title="Info">This is an info note.</Note>
+<Note type="tip" title="Tip">This is a tip note.</Note>
+<Note type="warning" title="Warning">This is a warning note.</Note>
+<Note type="danger" title="Danger">This is a danger note.</Note>
+```
+
+</Showcase>
+
+## Content
+
+<Showcase>
+  <Note slot="example" title="New in v1.0.0">
+    This feature is available in the last version. Learn more about it in the documentation.
+    <Code.Block lang="bash" code="npm install astro@latest" class="mt-4" />
+  </Note>
+    
+```astro
+---
+import Note from '@/components/ui/note.astro';
+import * as Code from '@phantom/ui/code';
+---
+
+<Note slot="example" title="New in v1.0.0">
+  This feature is available in the last version. Learn more about it in the documentation.
+  <Code.Block lang="bash" code="npm install astro@latest" class="mt-4" />
+</Note>
+```
+
+</Showcase>

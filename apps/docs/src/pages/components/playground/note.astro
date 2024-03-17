@@ -1,0 +1,52 @@
+---
+export const partial = true;
+
+import * as Playground from '@phantom/docs/components/playground';
+import * as Code from '@phantom/ui/code';
+import Component, { type Type } from '@phantom/ui/note.astro';
+import { createForm } from 'simple:form';
+
+const types: [Type, ...Type[]] = ['info', 'tip', 'warning', 'danger'];
+
+const form = createForm({
+  type: Playground.selectSchema(types),
+  title: Playground.switchSchema,
+  content: Playground.switchSchema,
+});
+
+const formData = await Astro.locals.form.getData(form);
+const { type = 'info', title, content } = formData?.data ?? {};
+
+// prettier-ignore
+const propsMapper: Record<(typeof types)[number], { title: string; content: string }> = {
+  info: { title: 'New in v1.0.0', content: 'This feature is available in the last version. Learn more about it in the documentation.' },
+  tip: { title: 'Did you know?', content: 'You can use this feature to improve your workflow. Download and try it out today!.' },
+  warning: { title: 'Caution', content: 'This feature is in beta and may change in the future. Please use with caution.' },
+  danger: { title: 'Deprecated', content: 'This feature has been deprecated and will be removed in the next version. Please follow the migration guide.' },
+};
+
+const code = `
+${Playground.buildImports([
+  { content: 'Note', path: '@/components/ui/note.astro' },
+  { content: '* as Code', path: '@/components/ui/code', hidden: !content },
+])}
+<Note ${Playground.buildProps({ type, title: title ? propsMapper[type].title : undefined })}>
+  ${propsMapper[type].content}${content ? '\n  <Code.Block lang="bash" code="npm install astro@latest" class="mt-4" />' : ''}
+</Note>
+`;
+---
+
+<Playground.Root component="note">
+  <Component slot="preview" {type} title={title ? propsMapper[type].title : undefined}>
+    {propsMapper[type].content}
+    {content && <Code.Block lang="bash" code="npm install astro@latest" class="mt-4" />}
+  </Component>
+
+  <Fragment slot="controls">
+    <Playground.ControlSelect name={form.inputProps.type.name} selected={type} options={types} />
+    <Playground.ControlSwitch name={form.inputProps.title.name} checked={title} />
+    <Playground.ControlSwitch name={form.inputProps.content.name} checked={content} />
+  </Fragment>
+
+  <Code.Block slot="code" lang="astro" code={code.trim()} />
+</Playground.Root>

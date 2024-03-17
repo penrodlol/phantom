@@ -1,25 +1,33 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { AlertOctagon, Info, Lightbulb } from 'lucide-astro';
+import { AlertOctagon, AlertTriangle, Info, Lightbulb } from 'lucide-astro';
 import { twMerge } from 'tailwind-merge';
 
 type Props = HTMLAttributes<'aside'> & { type?: Type; title?: string | undefined };
-export type Type = 'info' | 'tip' | 'danger';
+export type Type = 'info' | 'tip' | 'warning' | 'danger';
 
 const id = crypto.randomUUID();
 const { class: className, type = 'info', title, ...props } = Astro.props;
 ---
 
+<!-- prettier-ignore -->
 <aside
   {...props}
   aria-labelledby={id}
-  class={twMerge('bg-surface-2 flex flex-col gap-2 rounded border border-l-8 px-4 py-3', className)}
+  class={twMerge(
+    'bg-surface-2 flex items-start gap-2 rounded border border-l-8 px-4 py-3 text-sm',
+    'has-[h4_span]:flex-col [&_svg]:size-4 [&_svg]:shrink-0',
+    type === 'warning' && 'bg-surface-warning/20 border-surface-warning text-foreground-warning-outline',
+    type === 'danger' && 'bg-surface-danger/20 border-surface-danger text-foreground-danger-outline',
+    className,
+  )}
 >
-  <h4 {id} class="flex items-center gap-2 font-semibold tracking-wide">
-    {type === 'info' && <Info class="text-foreground-2 size-4 shrink-0" />}
-    {type === 'tip' && <Lightbulb class="text-foreground-2 size-4 shrink-0" />}
-    {type === 'danger' && <AlertOctagon class="text-foreground-2 size-4 shrink-0" />}
-    {title}
+  <h4 {id} class="peer flex items-center gap-2 text-base font-medium tracking-wide">
+    {type === 'info' && <Info class="text-foreground-2" />}
+    {type === 'tip' && <Lightbulb class="text-foreground-2" />}
+    {type === 'warning' && <AlertTriangle class="text-foreground-warning-outline" />}
+    {type === 'danger' && <AlertOctagon class="text-foreground-danger-outline" />}
+    {title && <span>{title}</span>}
   </h4>
-  <section class="text-foreground-2 text-sm"><slot /></section>
+  <section class="peer-has-[span]:text-foreground-2"><slot /></section>
 </aside>

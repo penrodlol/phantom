@@ -20,7 +20,7 @@ const formData = await Astro.locals.form.getData(form);
 const { color = 'primary', size = 'md', outline, icon, disabled, loading } = formData?.data ?? {};
 
 const code = `
-${Playground.buildImports([{ files: 'Button', path: '@/components/ui/button.astro' }])}
+${Playground.buildImports([{ content: 'Button', path: '@/components/ui/button.astro' }])}
 <Button ${Playground.buildProps({ color, size: icon ? 'icon' : size, outline, disabled })}>
   ${loading && !icon ? '<Loader2 aria-hidden class="size-4 motion-safe:animate-spin" /> ' : ''}${icon ? '<Heart aria-hidden />' : 'Button'}
 </Button>
@@ -34,8 +34,16 @@ ${Playground.buildImports([{ files: 'Button', path: '@/components/ui/button.astr
   </Component>
 
   <Fragment slot="controls">
-    <Playground.ControlColor name={form.inputProps.color.name} selected={color} />
-    <Playground.ControlSize name={form.inputProps.size.name} selected={size} />
+    <Playground.ControlSelect
+      name={form.inputProps.color.name}
+      selected={color}
+      options={Playground.colors}
+    />
+    <Playground.ControlSelect
+      name={form.inputProps.size.name}
+      selected={size}
+      options={Playground.sizes}
+    />
     <Playground.ControlSwitch name={form.inputProps.outline.name} checked={outline} />
     <Playground.ControlSwitch name={form.inputProps.disabled.name} checked={disabled} />
     <Playground.ControlSwitch name={form.inputProps.icon.name} checked={icon} />
