@@ -31,12 +31,13 @@ ${Playground.buildImports([
   { content: '* as Code', path: '@/components/ui/code', hidden: !content },
 ])}
 <Note ${Playground.buildProps({ type, title: title ? propsMapper[type].title : undefined })}>
-  ${propsMapper[type].content}${content ? '\n  <Code.Block lang="bash" code="npm install astro@latest" class="mt-4" />' : ''}
+  ${propsMapper[type].content}
+  ${content ? '<Code.Block lang="bash" code="npm install astro@latest" class="mt-4" />' : ''}
 </Note>
 `;
 ---
 
-<Playground.Root component="note">
+<Playground.Root component="note" {code}>
   <Component slot="preview" {type} title={title ? propsMapper[type].title : undefined}>
     {propsMapper[type].content}
     {content && <Code.Block lang="bash" code="npm install astro@latest" class="mt-4" />}
@@ -47,6 +48,4 @@ ${Playground.buildImports([
     <Playground.ControlSwitch name={form.inputProps.title.name} checked={title} />
     <Playground.ControlSwitch name={form.inputProps.content.name} checked={content} />
   </Fragment>
-
-  <Code.Block slot="code" lang="astro" code={code.trim()} />
 </Playground.Root>

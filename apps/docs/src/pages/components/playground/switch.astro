@@ -1,0 +1,40 @@
+---
+export const partial = true;
+
+import * as Playground from '@phantom/docs/components/playground';
+import Label from '@phantom/ui/label.astro';
+import Component from '@phantom/ui/switch.astro';
+import { createForm } from 'simple:form';
+
+const form = createForm({
+  checked: Playground.switchSchema,
+  label: Playground.switchSchema,
+  disabled: Playground.switchSchema,
+});
+
+const formData = await Astro.locals.form.getData(form);
+const { checked, label, disabled } = formData?.data ?? {};
+
+const code = `
+${Playground.buildImports([
+  { content: 'Switch', path: '@/components/ui/switch.astro' },
+  { content: 'Label', path: '@/components/ui/label.astro', hidden: !label },
+])}
+${label ? '<div class="flex items-center gap-2 text-sm">' : ''}
+  <Switch ${Playground.buildProps({ id: label ? 'shareLocation' : undefined, disabled, 'aria-label': !label ? 'Share Location' : undefined })}/>
+  ${label ? '<Label for="shareLocation">Share location</Label>' : ''}
+${label ? '</div>' : ''}
+`;
+---
+
+<Playground.Root component="switch" {code}>
+  <div slot="preview" class="flex items-center gap-2 text-sm">
+    <Component id="playground-switch" name={form.inputProps.checked.name} {checked} {disabled} />
+    {label && <Label for="playground-switch">Share location</Label>}
+  </div>
+
+  <Fragment slot="controls">
+    <Playground.ControlSwitch name={form.inputProps.label.name} checked={label} />
+    <Playground.ControlSwitch name={form.inputProps.disabled.name} checked={disabled} />
+  </Fragment>
+</Playground.Root>

@@ -3,7 +3,6 @@ export const partial = true;
 
 import * as Playground from '@phantom/docs/components/playground';
 import Component from '@phantom/ui/button.astro';
-import * as Code from '@phantom/ui/code';
 import { Heart, Loader2 } from 'lucide-astro';
 import { createForm } from 'simple:form';
 
@@ -27,7 +26,7 @@ ${Playground.buildImports([{ content: 'Button', path: '@/components/ui/button.as
 `;
 ---
 
-<Playground.Root component="button">
+<Playground.Root component="button" {code}>
   <Component slot="preview" {disabled} {color} {outline} size={icon ? 'icon' : size}>
     {loading && !icon && <Loader2 aria-hidden class="size-4 motion-safe:animate-spin" />}
     {icon ? <Heart aria-hidden /> : 'Button'}
@@ -49,6 +48,4 @@ ${Playground.buildImports([{ content: 'Button', path: '@/components/ui/button.as
     <Playground.ControlSwitch name={form.inputProps.icon.name} checked={icon} />
     <Playground.ControlSwitch name={form.inputProps.loading.name} checked={loading} />
   </Fragment>
-
-  <Code.Block slot="code" lang="astro" code={code.trim()} />
 </Playground.Root>

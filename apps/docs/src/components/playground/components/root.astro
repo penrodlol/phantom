@@ -1,11 +1,18 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import * as Code from '@phantom/ui/code';
+import type { ComponentProps, HTMLAttributes } from 'astro/types';
 import type { ValidContentEntrySlug } from 'astro:content';
+import prettier from 'prettier';
 import { twJoin, twMerge } from 'tailwind-merge';
 
-type Props = HTMLAttributes<'form'> & { component: ValidContentEntrySlug<'components'> };
+type Props = HTMLAttributes<'form'> & {
+  component: ValidContentEntrySlug<'components'>;
+  code: NonNullable<ComponentProps<typeof Code.Block>['code']>;
+};
 
-const { class: className, component, ...props } = Astro.props;
+const { class: className, component, code: _code, ...props } = Astro.props;
+const prettierConfig = await prettier.resolveConfig('prettier.config.cjs');
+const code = await prettier.format(_code, { ...prettierConfig, parser: 'astro' });
 ---
 
 <form
@@ -15,12 +22,13 @@ const { class: className, component, ...props } = Astro.props;
   method="POST"
   enctype="multipart/form-data"
   x-data="partial"
-  @change="$el.querySelector('[data-playground-submit]').click()"
+  @change="!$event.target.closest('[data-playground-preview]') && $el.querySelector('[data-playground-submit]').click()"
   @submit.prevent.debounce="submit"
   class={twMerge('mb-10 rounded border', className)}
 >
   <div class="rounded-t border-b md:grid md:grid-cols-[1fr_15rem]">
     <div
+      data-playground-preview
       class={twJoin(
         'flex items-center justify-center border-b p-10 md:border-b-0 md:border-r',
         'bg-[radial-gradient(hsl(var(--surface-3)/0.75)_1px,transparent_0)] bg-[size:5px_5px]',
@@ -30,6 +38,6 @@ const { class: className, component, ...props } = Astro.props;
     </div>
     <div class="flex flex-col justify-center gap-2 p-6 text-sm"><slot name="controls" /></div>
   </div>
-  <div class="rounded-b *:border-0"><slot name="code" /></div>
+  <Code.Block lang="astro" {code} class="rounded-b border-0" />
   <button type="submit" aria-hidden hidden data-playground-submit>submit</button>
 </form>

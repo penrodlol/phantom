@@ -1,7 +1,71 @@
 ---
 title: Switch
-description: ''
-draft: true
+description: An interactive element that can be toggled on and off.
+draft: false
 repo: https://github.com
-accessibility: https://github.com
+accessibility: https://www.w3.org/WAI/ARIA/apg/patterns/switch/
 ---
+
+import Installation from '@phantom/docs/components/installation.astro';
+import Showcase from '@phantom/docs/components/showcase.astro';
+import Playground from '@phantom/docs/pages/components/playground/switch.astro';
+import * as Code from '@phantom/ui/code';
+import Label from '@phantom/ui/label.astro';
+import Note from '@phantom/ui/note.astro';
+import Switch from '@phantom/ui/switch.astro';
+import SourceCode from '@phantom/ui/switch.astro?raw';
+
+<Playground />
+
+## Installation
+
+<Installation devDeps={['tailwind-merge']}>
+  <Code.Block title="components/ui/switch.astro" lang="astro" code={SourceCode} />
+</Installation>
+
+## Label
+
+<Note type="tip" title="Accessibility Tip">
+  It is recommend to use a label as it describes the purpose of the switch to the user and is read
+  by screen readers.
+  <br />
+  If you don't want to display a label, you can use the `aria-label{:inline}` attribute to provide a
+  label. A common use case for this could be on a dark/light mode switch.
+</Note>
+
+<Showcase>
+  <div slot="example" class="flex items-center gap-2 text-sm">
+    <Switch id="shareLocation" />
+    <Label for="shareLocation">Share Location</Label>
+  </div>
+
+```astro
+---
+import Switch from '@/components/ui/switch.astro';
+import Label from '@/components/ui/label.astro';
+---
+
+<div class="flex items-center gap-2 text-sm">
+  <Switch id="shareLocation" />
+  <Label for="shareLocation">Share Location</Label>
+</div>
+```
+
+</Showcase>
+
+## Disabled
+
+The `Switch{:inline}` component can be disabled by setting the `disabled{:inline}` prop.
+
+<Showcase>
+  <Switch slot="example" disabled/>
+  
+```astro
+---
+import Switch from '@/components/ui/switch.astro';
+---
+
+<Switch disabled />
+```
+
+</Showcase>
