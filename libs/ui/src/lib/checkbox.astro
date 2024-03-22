@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { Check, Minus } from 'lucide-astro';
+import { twMerge } from 'tailwind-merge';
+
+type Props = HTMLAttributes<'input'>;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div
+  class={twMerge(
+    'text-foreground-primary relative flex size-4 shrink-0 items-center justify-center rounded border',
+    'has-[input:checked]:bg-surface-primary has-[input-checked]:border-surface-primary motion-safe:transition-colors',
+    'has-[input:disabled]:opacity-50 has-[input:focus-visible]:outline-none has-[input:focus-visible]:ring-1',
+    'has-[input:indeterminate]:bg-surface-primary/50',
+    className,
+  )}
+>
+  <input
+    {...props}
+    type="checkbox"
+    class="peer absolute -inset-1 cursor-pointer opacity-0 disabled:cursor-not-allowed"
+  />
+  <Check aria-hidden class="size-2.5 stroke-[4] peer-[:not(:checked)]:hidden" />
+  <Minus aria-hidden class="size-2.5 stroke-[4] peer-[:not(:indeterminate)]:hidden" />
+</div>
