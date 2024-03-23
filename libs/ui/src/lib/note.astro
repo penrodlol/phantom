@@ -15,18 +15,18 @@ const { class: className, type = 'info', title, ...props } = Astro.props;
   {...props}
   aria-labelledby={id}
   class={twMerge(
-    'bg-surface-2 flex items-start gap-2 rounded border border-l-8 px-4 py-3 text-sm',
+    'bg-surface-2 flex items-start gap-2 rounded border border-l-8 px-4 py-3 text-sm', 
     'has-[h4_span]:flex-col [&_svg]:size-4 [&_svg]:shrink-0',
     type === 'warning' && 'bg-surface-warning/20 border-surface-warning text-foreground-warning-outline',
     type === 'danger' && 'bg-surface-danger/20 border-surface-danger text-foreground-danger-outline',
     className,
   )}
 >
-  <h4 {id} class="peer flex items-center gap-2 text-base font-medium tracking-wide">
-    {type === 'info' && <Info class="text-foreground-2" />}
-    {type === 'tip' && <Lightbulb class="text-foreground-2" />}
-    {type === 'warning' && <AlertTriangle class="text-foreground-warning-outline" />}
-    {type === 'danger' && <AlertOctagon class="text-foreground-danger-outline" />}
+  <h4 {id} aria-label={title ?? type} class="peer flex items-center gap-2 text-base font-medium tracking-wide">
+    {type === 'info' && <Info class="text-foreground-2" aria-hidden />}
+    {type === 'tip' && <Lightbulb class="text-foreground-2" aria-hidden />}
+    {type === 'warning' && <AlertTriangle class="text-foreground-warning-outline" aria-hidden />}
+    {type === 'danger' && <AlertOctagon class="text-foreground-danger-outline" aria-hidden />}
     {title && <span>{title}</span>}
   </h4>
   <section class="peer-has-[span]:text-foreground-2"><slot /></section>
