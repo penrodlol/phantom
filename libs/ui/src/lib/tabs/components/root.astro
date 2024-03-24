@@ -1,18 +1,26 @@
 ---
+import { getProps, render } from '@phantom/core/component';
 import type { HTMLAttributes } from 'astro/types';
-import { twMerge } from 'tailwind-merge';
 
-type Props = HTMLAttributes<'div'> & { defaultValue: string; type?: Type };
-export type Type = 'automatic' | 'manual';
+type Props = HTMLAttributes<'div'> & { type?: 'automatic' | 'manual'; defaultValue?: string };
 
-const { class: className, defaultValue, type, ...props } = Astro.props;
+const { class: className, defaultValue, type = 'automatic', ...props } = Astro.props;
+
+const html = render(await Astro.slots.render('default'), {
+  '[role=tab]': {
+    id: ({ id, dataValue }) => `${id}-tab-${dataValue}`,
+    tabindex: ({ dataValue }) => (defaultValue === dataValue ? 0 : -1),
+    ariaControls: ({ id, dataValue }) => `${id}-panel-${dataValue}`,
+    ariaSelected: ({ first, dataValue }) => defaultValue === dataValue || (first && !defaultValue),
+  },
+  '[role=tabpanel]': {
+    id: ({ id, dataValue }) => `${id}-panel-${dataValue}`,
+    ariaLabelledby: ({ id, dataValue }) => `${id}-tab-${dataValue}`,
+    ariaHidden: ({ first, dataValue }) => defaultValue !== dataValue && !(first && !defaultValue),
+  },
+});
+
+const active = defaultValue ?? getProps(html, '[role=tab]:first-of-type').dataValue;
 ---
 
-<div
-  {...props}
-  x-data={`{ id: "${crypto.randomUUID()}", active: "${defaultValue}", type: "${type ?? 'automatic'}" }`}
-  x-init="$el.classList.remove('opacity-0');"
-  class={twMerge('opacity-0', className)}
->
-  <slot />
-</div>
+<div {...props} x-data={`{  active: "${active}", type: "${type}" }`} set:html={html} />

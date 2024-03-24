@@ -11,8 +11,7 @@ const { class: className, value, ...props } = Astro.props;
   {...props}
   role="tab"
   type="button"
-  :id={`id+"-tab-${value}"`}
-  :aria-controls={`id+"-panel-${value}"`}
+  data-value={value}
   :tabindex={`active === "${value}" ? '0' : '-1'`}
   :aria-selected={`active === "${value}"`}
   @click={`active = "${value}"`}

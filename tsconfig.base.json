@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@phantom/core/*": ["libs/core/src/lib/*"],
       "@phantom/docs/*": ["apps/docs/src/*"],
       "@phantom/ui/*": ["libs/ui/src/lib/*"],
       "@phantom/utils/*": ["libs/utils/src/lib/*"]

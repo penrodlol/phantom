@@ -11,8 +11,7 @@ const { class: className, value, ...props } = Astro.props;
   {...props}
   role="tabpanel"
   tabindex="0"
-  :id={`id+"-panel-${value}"`}
-  :aria-labelledby={`id+"-tab-${value}"`}
+  data-value={value}
   :aria-hidden={`active !== "${value}"`}
   class={twMerge(
     'mt-4 rounded focus-visible:outline-none focus-visible:ring-1 aria-hidden:hidden',
