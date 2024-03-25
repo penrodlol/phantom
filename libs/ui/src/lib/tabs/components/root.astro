@@ -1,10 +1,11 @@
 ---
 import { getProps, render } from '@phantom/core/component';
 import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
 
-type Props = HTMLAttributes<'div'> & { type?: 'automatic' | 'manual'; defaultValue?: string };
+type Props = HTMLAttributes<'div'> & { activation?: 'automatic' | 'manual'; defaultValue?: string };
 
-const { class: className, defaultValue, type = 'automatic', ...props } = Astro.props;
+const { class: className, defaultValue, activation = 'automatic', ...props } = Astro.props;
 
 const html = render(await Astro.slots.render('default'), {
   '[role=tab]': {
@@ -23,4 +24,9 @@ const html = render(await Astro.slots.render('default'), {
 const active = defaultValue ?? getProps(html, '[role=tab]:first-of-type').dataValue;
 ---
 
-<div {...props} x-data={`{  active: "${active}", type: "${type}" }`} set:html={html} />
+<div
+  {...props}
+  x-data={`{  active: "${active}", activation: "${activation}" }`}
+  class={twMerge('w-full', className)}
+  set:html={html}
+/>

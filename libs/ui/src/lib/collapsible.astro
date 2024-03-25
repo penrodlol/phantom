@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+type Props = HTMLAttributes<'div'> &
+  VariantProps<typeof variants> & { expanded?: boolean; collapsedHeight?: number };
+
+const variants = tv({
+  base: 'group relative flex',
+  defaultVariants: { direction: 'bottom' },
+  variants: { direction: { top: 'flex-col-reverse', bottom: 'flex-col' } },
+});
+
+const id = crypto.randomUUID();
+const { class: className, expanded, direction, collapsedHeight = 100, ...props } = Astro.props;
+---
+
+<div
+  {...props}
+  x-data={`{ expanded: ${expanded ?? false} }`}
+  x-init=`() => {
+    $el.firstElementChild?.setAttribute("aria-controls", "${id}");
+    $el.firstElementChild?.addEventListener("click", () => expanded = !expanded);
+  }`
+  class={variants({ direction, className })}
+>
+  <slot name="collapsible-trigger" />
+  <div x-show="expanded" {...{ [`x-collapse.min.${collapsedHeight}px`]: '' }} {id}><slot /></div>
+  <div
+    x-show="!expanded"
+    style={`height: ${collapsedHeight}px`}
+    class="to-surface-1 absolute bottom-0 w-full bg-gradient-to-b from-transparent"
+  >
+  </div>
+</div>

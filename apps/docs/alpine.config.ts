@@ -1,10 +1,12 @@
 // @ts-ignore
 import focus from '@alpinejs/focus';
+// @ts-ignore
+import collapse from '@alpinejs/collapse';
 
 import type { Alpine } from 'alpinejs';
 
 export default (Alpine: Alpine) => {
-  Alpine.plugin(focus);
+  Alpine.plugin([focus, collapse]);
 
   Alpine.magic('setOverflow', () => (show: boolean, target = document.documentElement) => {
     if (show) target.style.removeProperty('overflow');

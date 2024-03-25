@@ -1,10 +1,27 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { twMerge } from 'tailwind-merge';
+import { tv, type VariantProps } from 'tailwind-variants';
 
-type Props = HTMLAttributes<'div'>;
+const variants = tv({
+  base: 'gap-2 rounded flex',
+  defaultVariants: { elevation: 'flat', grow: false },
+  variants: {
+    grow: { true: '!max-w-none *:flex-1' },
+    position: {
+      start: 'justify-start mr-auto',
+      center: 'justify-center mx-auto',
+      end: 'justify-end ml-auto',
+    },
+    elevation: {
+      flat: '[box-shadow:0_-1px_0_hsl(var(--border))_inset]',
+      raised: 'max-w-max bg-surface-3 p-1 [&_[aria-selected=true]]:bg-surface-1 *:after:hidden',
+    },
+  },
+});
 
-const { class: className, ...props } = Astro.props;
+type Props = HTMLAttributes<'div'> & VariantProps<typeof variants>;
+
+const { class: className, elevation, grow, position, ...props } = Astro.props;
 ---
 
 <div
@@ -14,7 +31,7 @@ const { class: className, ...props } = Astro.props;
   @keydown.left.prevent.stop="$focus.wrap().prev()"
   @keydown.home.prevent.stop="$focus.first()"
   @keydown.end.prevent.stop="$focus.last()"
-  class={twMerge('flex gap-2 [box-shadow:0_-1px_0_hsl(var(--border))_inset]', className)}
+  class={variants({ elevation, grow, position, className })}
 >
   <slot />
 </div>

@@ -2,6 +2,7 @@
   "name": "@phantom/ui",
   "private": true,
   "dependencies": {
+    "@alpinejs/collapse": "^3.13.7",
     "@alpinejs/focus": "^3.13.5",
     "@astrojs/alpinejs": "^0.4.0",
     "@astrojs/check": "^0.5.6",

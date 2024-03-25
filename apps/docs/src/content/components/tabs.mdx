@@ -1,7 +1,344 @@
 ---
 title: Tabs
-description: ''
-draft: true
+description: A tabbed interface for organizing content into sections.
 repo: https://github.com
-accessibility: https://github.com
+accessibility: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
 ---
+
+import Installation from '@phantom/docs/components/installation.astro';
+import Showcase from '@phantom/docs/components/showcase.astro';
+import * as Code from '@phantom/ui/code';
+import Command from '@phantom/ui/command.astro';
+import Note from '@phantom/ui/note.astro';
+import * as Tabs from '@phantom/ui/tabs';
+import SourceCodeRoot from '@phantom/ui/tabs/components/root.astro?raw';
+import SourceCodeTab from '@phantom/ui/tabs/components/tab.astro?raw';
+import SourceCodeTabList from '@phantom/ui/tabs/components/tablist.astro?raw';
+import SourceCodeTabPanel from '@phantom/ui/tabs/components/tabpanel.astro?raw';
+
+## Installation
+
+<Installation devDeps={['tailwind-merge']}>
+  <Tabs.Root>
+    <Tabs.TabList>
+      <Tabs.Tab value="root">root</Tabs.Tab>
+      <Tabs.Tab value="tablist">tablist</Tabs.Tab>
+      <Tabs.Tab value="tab">tab</Tabs.Tab>
+      <Tabs.Tab value="tabpanel">tabpanel</Tabs.Tab>
+    </Tabs.TabList>
+    <Tabs.TabPanel value="root">
+      <Code.Block title="components/ui/root.astro" lang="astro" code={SourceCodeRoot} />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="tablist">
+      <Code.Block title="components/ui/tabs/tablist.astro" lang="astro" code={SourceCodeTabList} />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="tab">
+      <Code.Block title="components/ui/tabs/tab.astro" lang="astro" code={SourceCodeTab} />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="tabpanel">
+      <Code.Block
+        title="components/ui/tabs/tabpanel.astro"
+        lang="astro"
+        code={SourceCodeTabPanel}
+      />
+    </Tabs.TabPanel>
+  </Tabs.Root>
+</Installation>
+
+## Elevation
+
+The `TabList{:inline}` component elevation can be defined using the `elevation{:inline}` prop.
+
+Available elevations: `flat{:inline}`, `raised{:inline}`.
+
+<Showcase>
+  <div slot="example" class="flex flex-col gap-16 w-full">
+    <Tabs.Root>
+      <Tabs.TabList elevation="flat">
+        <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+        <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+        <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+    </Tabs.Root>
+    <Tabs.Root>
+      <Tabs.TabList elevation="raised">
+        <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+        <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+        <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+    </Tabs.Root>
+  </div>
+
+```astro
+<Tabs.Root>
+  <Tabs.TabList elevation="flat">
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+
+<Tabs.Root>
+  <Tabs.TabList elevation="raised">
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+```
+
+</Showcase>
+
+## Grow
+
+The `TabList{:inline}` component can grow to fill the available space using the `grow{:inline}`
+prop.
+
+Can be used in combination with the `elevation{:inline}` prop.
+
+<Showcase>
+  <div slot="example" class="flex flex-col gap-16 w-full">
+    <Tabs.Root>
+      <Tabs.TabList elevation="flat" grow>
+        <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+        <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+        <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+    </Tabs.Root>
+    <Tabs.Root>
+      <Tabs.TabList elevation="raised" grow>
+        <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+        <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+        <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+    </Tabs.Root>
+  </div>
+
+```astro
+<Tabs.Root>
+  <Tabs.TabList elevation="flat" grow>
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+
+<Tabs.Root>
+  <Tabs.TabList elevation="raised" grow>
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+```
+
+</Showcase>
+
+## Position
+
+The `TabList{:inline}` component position can be defined using the `position{:inline}` prop.
+
+Available positions: `start{:inline}`, `end{:inline}`, and `center{:inline}`.
+
+<Note type="warning">
+  The `position` prop will have no effect if the `grow` prop is set to `true`.
+</Note>
+
+<Showcase>
+  <div slot="example" class="flex flex-col gap-16 w-full">
+    <Tabs.Root>
+      <Tabs.TabList position="start">
+        <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+        <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+        <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+    </Tabs.Root>
+    <Tabs.Root>
+      <Tabs.TabList position="center">
+        <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+        <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+        <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+    </Tabs.Root>
+    <Tabs.Root>
+      <Tabs.TabList position="end">
+        <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+        <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+        <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+      </Tabs.TabList>
+      <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+      <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+    </Tabs.Root>
+  </div>
+
+```astro
+<Tabs.Root>
+  <Tabs.TabList position="start">
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+
+<Tabs.Root>
+  <Tabs.TabList position="center">
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+
+<Tabs.Root>
+  <Tabs.TabList position="end">
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+```
+
+</Showcase>
+
+## Disabled
+
+The `Tab{:inline}` component can be disabled using the `disabled{:inline}` prop.
+
+<Showcase>
+  <Tabs.Root slot="example">
+    <Tabs.TabList>
+      <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+      <Tabs.Tab value="tab-2" disabled>Tab 2</Tabs.Tab>
+      <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+    </Tabs.TabList>
+    <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+    <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+    <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+  </Tabs.Root>
+
+```astro
+<Tabs.Root>
+  <Tabs.TabList>
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2" disabled>Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+```
+
+</Showcase>
+
+## Activation
+
+The `TabPanel{:inline}` component, by default, will be activated automatically when the
+corresponding `Tab` is focused.
+
+This can be changed to manual activation by setting the `activation{:inline}` prop to
+`manual{:inline}` on the `Root{:inline}` component. By setting this prop, the `TabPanel{:inline}`
+will only be activated when the `Tab{:inline}` is focused and the user
+presses<Command value="Enter" /> or <Command value="Space" />.
+
+Available activations: `automatic{:inline}`, `manual{:inline}`.
+
+<Showcase>
+  <Tabs.Root slot="example" activation="manual">
+    <Tabs.TabList>
+      <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+      <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+      <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+    </Tabs.TabList>
+    <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+    <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+    <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+  </Tabs.Root>
+
+```astro
+<Tabs.Root activation="manual">
+  <Tabs.TabList>
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+```
+
+</Showcase>
+
+## Default Value
+
+The `Root{:inline}` component can define the default active `Tab{:inline}` using the
+`defaultValue{:inline}` prop.
+
+<Note>The defaultValue must match the value prop of one of the Tab components.</Note>
+
+<Showcase>
+  <Tabs.Root slot="example" defaultValue="tab-2">
+    <Tabs.TabList>
+      <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+      <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+      <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+    </Tabs.TabList>
+    <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+    <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+    <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+  </Tabs.Root>
+
+```astro
+<Tabs.Root defaultValue="tab-2">
+  <Tabs.TabList>
+    <Tabs.Tab value="tab-1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab-2">Tab 2</Tabs.Tab>
+    <Tabs.Tab value="tab-3">Tab 3</Tabs.Tab>
+  </Tabs.TabList>
+  <Tabs.TabPanel value="tab-1">Tab 1 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-2">Tab 2 Content</Tabs.TabPanel>
+  <Tabs.TabPanel value="tab-3">Tab 3 Content</Tabs.TabPanel>
+</Tabs.Root>
+```
+
+</Showcase>

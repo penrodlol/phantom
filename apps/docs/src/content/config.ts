@@ -5,7 +5,7 @@ const components = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    draft: z.boolean(),
+    draft: z.boolean().optional(),
     repo: z.string().url(),
     accessibility: z.string().url(),
   }),

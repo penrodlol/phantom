@@ -15,15 +15,16 @@ const { class: className, value, ...props } = Astro.props;
   :tabindex={`active === "${value}" ? '0' : '-1'`}
   :aria-selected={`active === "${value}"`}
   @click={`active = "${value}"`}
-  @focus={`type === "automatic" && (active = "${value}")`}
-  @keydown.enter.prevent.stop={`type === "manual" && (active = "${value}")`}
-  @keydown.space.prevent.stop={`type === "manual" && (active = "${value}")`}
+  @focus={`activation === "automatic" && (active = "${value}")`}
+  @keydown.enter.prevent.stop={`activation === "manual" && (active = "${value}")`}
+  @keydown.space.prevent.stop={`activation === "manual" && (active = "${value}")`}
   class={twMerge(
     'text-foreground-2 relative flex items-center justify-center whitespace-nowrap rounded px-3 py-0.5',
     'after:absolute after:inset-x-0 after:top-full after:h-px',
     'aria-selected:after:bg-surface-primary aria-selected:text-foreground-1',
-    'hover:text-foreground-1 motion-safe:transition-colors',
+    'enabled:hover:text-foreground-1 motion-safe:transition-colors',
     'focus-visible:text-foreground-1 focus-visible:outline-none focus-visible:ring-1',
+    'disabled:cursor-not-allowed disabled:opacity-50',
     className,
   )}
 >

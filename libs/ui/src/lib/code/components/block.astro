@@ -29,7 +29,7 @@ const { class: className, title, code, lang, ...props } = Astro.props;
     color="ghost"
     size="icon"
     aria-label="Copy to clipboard"
-    class="text-foreground-2 absolute right-0 top-px *:size-3.5"
+    class="text-foreground-2 absolute right-0 top-px z-10 *:size-3.5"
     @click="navigator.clipboard.writeText($root.lastElementChild.textContent.trim()).then(() => copied = true)"
     @mouseleave.debounce.1000ms="copied && (copied = false)"
   >

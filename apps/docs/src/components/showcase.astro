@@ -1,5 +1,8 @@
 ---
+import Button from '@phantom/ui/button.astro';
+import Collapsible from '@phantom/ui/collapsible.astro';
 import type { HTMLAttributes } from 'astro/types';
+import { ChevronsUpDown } from 'lucide-astro';
 import { twJoin, twMerge } from 'tailwind-merge';
 
 type Props = HTMLAttributes<'div'>;
@@ -16,5 +19,11 @@ const { class: className, ...props } = Astro.props;
   >
     <slot name="example" />
   </div>
-  <div class="*:border-0"><slot /></div>
+  <Collapsible>
+    <Button slot="collapsible-trigger" color="ghost" size="sm">
+      <span x-text="expanded ? 'Collapse Code' : 'Expand Code'"></span>
+      <ChevronsUpDown aria-hidden class="size-3" />
+    </Button>
+    <div class="border-t *:border-0"><slot /></div>
+  </Collapsible>
 </div>
