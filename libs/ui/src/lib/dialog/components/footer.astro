@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const variants = tv({
+  base: 'sticky inset-x-0 bottom-0 flex item-center gap-2 px-6 pb-4 bg-inherit',
+  defaultVariants: { position: 'right' },
+  variants: { position: { left: 'justify-start', right: 'justify-end', space: 'justify-between' } },
+});
+
+type Props = HTMLAttributes<'div'> & VariantProps<typeof variants>;
+
+const { class: className, position, ...props } = Astro.props;
+---
+
+<div {...props} class={variants({ position, className })}><slot /></div>

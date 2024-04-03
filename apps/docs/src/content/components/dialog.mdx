@@ -1,7 +1,443 @@
 ---
 title: Dialog
-description: ''
-draft: true
+description: An interactive decendant window that is displayed on top of the main window.
+draft: false
 repo: https://github.com
-accessibility: https://github.com
+accessibility: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 ---
+
+import Installation from '@phantom/docs/components/installation.astro';
+import Showcase from '@phantom/docs/components/showcase.astro';
+import Button from '@phantom/ui/button.astro';
+import * as Code from '@phantom/ui/code';
+import * as Dialog from '@phantom/ui/dialog';
+import SourceCodeBody from '@phantom/ui/dialog/components/body.astro?raw';
+import SourceCodeDescription from '@phantom/ui/dialog/components/description.astro?raw';
+import SourceCodeFooter from '@phantom/ui/dialog/components/footer.astro?raw';
+import SourceCodeHeader from '@phantom/ui/dialog/components/header.astro?raw';
+import SourceCodeRoot from '@phantom/ui/dialog/components/root.astro?raw';
+import SourceCodeTitle from '@phantom/ui/dialog/components/title.astro?raw';
+import Note from '@phantom/ui/note.astro';
+import * as Tabs from '@phantom/ui/tabs';
+
+## Installation
+
+<Installation deps={['lucide-astro']} devDeps={['tailwind-variants', 'tailwind-merge']}>
+  <Tabs.Root>
+    <Tabs.TabList>
+      <Tabs.Tab value="root">root</Tabs.Tab>
+      <Tabs.Tab value="header">header</Tabs.Tab>
+      <Tabs.Tab value="title">title</Tabs.Tab>
+      <Tabs.Tab value="description">description</Tabs.Tab>
+      <Tabs.Tab value="body">body</Tabs.Tab>
+      <Tabs.Tab value="footer">footer</Tabs.Tab>
+    </Tabs.TabList>
+    <Tabs.TabPanel value="root">
+      <Code.Block title="components/ui/root.astro" lang="astro" code={SourceCodeRoot} />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="header">
+      <Code.Block title="components/ui/header.astro" lang="astro" code={SourceCodeHeader} />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="title">
+      <Code.Block title="components/ui/title.astro" lang="astro" code={SourceCodeTitle} />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="description">
+      <Code.Block
+        title="components/ui/description.astro"
+        lang="astro"
+        code={SourceCodeDescription}
+      />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="body">
+      <Code.Block title="components/ui/body.astro" lang="astro" code={SourceCodeBody} />
+    </Tabs.TabPanel>
+    <Tabs.TabPanel value="footer">
+      <Code.Block title="components/ui/footer.astro" lang="astro" code={SourceCodeFooter} />
+    </Tabs.TabPanel>
+  </Tabs.Root>
+</Installation>
+
+## Size
+
+The `Dialog{:inline}` size can be defined using the `size` prop.
+
+Available sizes: `sm{:inline}`, `md{:inline}`, and `lg{:inline}`.
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap justify-center gap-6">
+    <Dialog.Root size="sm">
+      <Button slot="dialog-trigger">Small</Button>
+      <Dialog.Header>
+        <Dialog.Title>Dialog Title</Dialog.Title>
+        <Dialog.Description>Dialog Description</Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Body>Dialog Body</Dialog.Body>
+      <Dialog.Footer>
+        <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+        <Button size="sm" x-on:click="$root.close()">Save</Button>
+      </Dialog.Footer>
+    </Dialog.Root>
+    <Dialog.Root size="md">
+      <Button slot="dialog-trigger">Medium</Button>
+      <Dialog.Header>
+        <Dialog.Title>Dialog Title</Dialog.Title>
+        <Dialog.Description>Dialog Description</Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Body>Dialog Body</Dialog.Body>
+      <Dialog.Footer>
+        <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+        <Button size="sm" x-on:click="$root.close()">Save</Button>
+      </Dialog.Footer>
+    </Dialog.Root>
+    <Dialog.Root size="lg">
+     <Button slot="dialog-trigger">Large</Button>
+     <Dialog.Header>
+       <Dialog.Title>Dialog Title</Dialog.Title>
+       <Dialog.Description>Dialog Description</Dialog.Description>
+     </Dialog.Header>
+     <Dialog.Body>Dialog Body</Dialog.Body>
+     <Dialog.Footer>
+       <Button color="ghost" x-on:click="$root.close()">Cancel</Button>
+       <Button x-on:click="$root.close()">Save</Button>
+     </Dialog.Footer>
+    </Dialog.Root>
+  </div>
+  
+```astro
+---
+import * as Dialog from '@phantom/ui/dialog';
+---
+
+<Dialog.Root slot="example" size="sm">
+  <Button slot="dialog-trigger">Small</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body>Dialog Body</Dialog.Body>
+  <Dialog.Footer>
+    <Button color="ghost" size="sm" @click="$root.close()">Cancel</Button>
+    <Button size="sm" @click="$root.close()">Save</Button>
+  </Dialog.Footer>
+</Dialog.Root>
+
+<Dialog.Root size="md">
+  <Button slot="dialog-trigger">Medium</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body>Dialog Body</Dialog.Body>
+  <Dialog.Footer>
+    <Button color="ghost" size="sm" @click="$root.close()">Cancel</Button>
+    <Button size="sm" @click="$root.close()">Save</Button>
+  </Dialog.Footer>
+</Dialog.Root>
+
+<Dialog.Root size="lg">
+ <Button slot="dialog-trigger">Large</Button>
+ <Dialog.Header>
+   <Dialog.Title>Dialog Title</Dialog.Title>
+   <Dialog.Description>Dialog Description</Dialog.Description>
+ </Dialog.Header>
+ <Dialog.Body>Dialog Body</Dialog.Body>
+ <Dialog.Footer>
+   <Button color="ghost" @click="$root.close()">Cancel</Button>
+   <Button @click="$root.close()">Save</Button>
+ </Dialog.Footer>
+</Dialog.Root>
+```
+
+</Showcase>
+
+## Position
+
+The `Dialog{:inline}` position can be defined using the `position` prop.
+
+Available positions: `top{:inline}`, and `bottom{:inline}`.
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap justify-center gap-6">
+    <Dialog.Root position="top">
+      <Button slot="dialog-trigger">Top</Button>
+      <Dialog.Header>
+        <Dialog.Title>Dialog Title</Dialog.Title>
+        <Dialog.Description>Dialog Description</Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Body>Dialog Body</Dialog.Body>
+      <Dialog.Footer>
+        <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+        <Button size="sm" x-on:click="$root.close()">Save</Button>
+      </Dialog.Footer>
+    </Dialog.Root>
+    <Dialog.Root position="bottom">
+     <Button slot="dialog-trigger">Bottom</Button>
+     <Dialog.Header>
+       <Dialog.Title>Dialog Title</Dialog.Title>
+       <Dialog.Description>Dialog Description</Dialog.Description>
+     </Dialog.Header>
+     <Dialog.Body>Dialog Body</Dialog.Body>
+     <Dialog.Footer>
+      <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+      <Button size="sm" x-on:click="$root.close()">Save</Button>
+     </Dialog.Footer>
+    </Dialog.Root>
+  </div>
+  
+```astro
+---
+import * as Dialog from '@phantom/ui/dialog';
+---
+
+<Dialog.Root position="top">
+  <Button slot="dialog-trigger">Top</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body>Dialog Body</Dialog.Body>
+  <Dialog.Footer>
+    <Button color="ghost" size="sm" @click="$root.close()">Cancel</Button>
+    <Button size="sm" @click="$root.close()">Save</Button>
+  </Dialog.Footer>
+</Dialog.Root>
+
+<Dialog.Root position="bottom">
+ <Button slot="dialog-trigger">Bottom</Button>
+ <Dialog.Header>
+   <Dialog.Title>Dialog Title</Dialog.Title>
+   <Dialog.Description>Dialog Description</Dialog.Description>
+ </Dialog.Header>
+ <Dialog.Body>Dialog Body</Dialog.Body>
+ <Dialog.Footer>
+  <Button color="ghost" size="sm" @click="$root.close()">Cancel</Button>
+  <Button size="sm" @click="$root.close()">Save</Button>
+ </Dialog.Footer>
+</Dialog.Root>
+```
+
+</Showcase>
+
+## Position Footer
+
+The `Footer{:inline}` actions position can be defined using the `position` prop.
+
+Available sizes: `left{:inline}`, `right{:inline}`, and `space{:inline}`.
+
+<Showcase>
+  <div slot="example" class="flex flex-wrap justify-center gap-6">
+    <Dialog.Root>
+      <Button slot="dialog-trigger">Left</Button>
+      <Dialog.Header>
+        <Dialog.Title>Dialog Title</Dialog.Title>
+        <Dialog.Description>Dialog Description</Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Body>Dialog Body</Dialog.Body>
+      <Dialog.Footer position="left">
+        <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+        <Button size="sm" x-on:click="$root.close()">Save</Button>
+      </Dialog.Footer>
+    </Dialog.Root>
+    <Dialog.Root>
+      <Button slot="dialog-trigger">Right</Button>
+      <Dialog.Header>
+        <Dialog.Title>Dialog Title</Dialog.Title>
+        <Dialog.Description>Dialog Description</Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Body>Dialog Body</Dialog.Body>
+      <Dialog.Footer position="right">
+        <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+        <Button size="sm" x-on:click="$root.close()">Save</Button>
+      </Dialog.Footer>
+    </Dialog.Root>
+    <Dialog.Root>
+     <Button slot="dialog-trigger">Space</Button>
+     <Dialog.Header>
+       <Dialog.Title>Dialog Title</Dialog.Title>
+       <Dialog.Description>Dialog Description</Dialog.Description>
+     </Dialog.Header>
+     <Dialog.Body>Dialog Body</Dialog.Body>
+     <Dialog.Footer position="space">
+       <Button color="ghost" x-on:click="$root.close()">Cancel</Button>
+       <Button x-on:click="$root.close()">Save</Button>
+     </Dialog.Footer>
+    </Dialog.Root>
+  </div>
+  
+```astro
+---
+import * as Dialog from '@phantom/ui/dialog';
+---
+
+<Dialog.Root>
+  <Button slot="dialog-trigger">Left</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body>Dialog Body</Dialog.Body>
+  <Dialog.Footer position="left">
+    <Button color="ghost" size="sm" @click="$root.close()">Cancel</Button>
+    <Button size="sm" @click="$root.close()">Save</Button>
+  </Dialog.Footer>
+</Dialog.Root>
+
+<Dialog.Root>
+  <Button slot="dialog-trigger">Right</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body>Dialog Body</Dialog.Body>
+  <Dialog.Footer position="right">
+    <Button color="ghost" size="sm" @click="$root.close()">Cancel</Button>
+    <Button size="sm" @click="$root.close()">Save</Button>
+  </Dialog.Footer>
+</Dialog.Root>
+
+<Dialog.Root>
+ <Button slot="dialog-trigger">Space</Button>
+ <Dialog.Header>
+   <Dialog.Title>Dialog Title</Dialog.Title>
+   <Dialog.Description>Dialog Description</Dialog.Description>
+ </Dialog.Header>
+ <Dialog.Body>Dialog Body</Dialog.Body>
+ <Dialog.Footer position="space">
+   <Button color="ghost" @click="$root.close()">Cancel</Button>
+   <Button @click="$root.close()">Save</Button>
+ </Dialog.Footer>
+</Dialog.Root>
+```
+
+</Showcase>
+
+## Scrollable
+
+By default, the `Body{:inline}` component will handle horizontal and vertical overflow when the
+content exceeds the size of the dialog.
+
+The `Header{:inline}` and `Footer{:inline}` components will remain fixed at the top and bottom of
+the dialog, respectively.
+
+<Showcase>
+ <Dialog.Root slot="example">
+    <Button slot="dialog-trigger">Open Dialog</Button>
+    <Dialog.Header>
+      <Dialog.Title>Dialog Title</Dialog.Title>
+      <Dialog.Description>Dialog Description</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body class="h-screen w-screen">Dialog Body</Dialog.Body>
+    <Dialog.Footer>
+      <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+      <Button size="sm" x-on:click="$root.close()">Save</Button>
+    </Dialog.Footer>
+  </Dialog.Root>
+
+```astro
+---
+import * as Dialog from '@phantom/ui/dialog';
+---
+
+<Dialog.Root>
+  <Button slot="dialog-trigger">Open Dialog</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body class="h-screen w-screen">Dialog Body</Dialog.Body>
+  <Dialog.Footer>
+    <Button color="ghost" size="sm" @click="$root.close()"> Cancel </Button>
+    <Button size="sm" @click="$root.close()"> Save </Button>
+  </Dialog.Footer>
+</Dialog.Root>
+```
+
+</Showcase>
+
+## Animate
+
+By default, `Dialog{:inline}` component opening is animated with a fade-in and pop-in effect.
+
+If graphics performance is a concern, the animation can be disabled using the `animate{:inline}`
+prop.
+
+<Note type="tip">
+  A common use case is for dialogs which contain large amounts of content. Disabling animations can
+  prevent the dialog from appearing to stutter when opening.
+</Note>
+
+<Showcase>
+ <Dialog.Root slot="example" animate={false}>
+    <Button slot="dialog-trigger">Open Dialog</Button>
+    <Dialog.Header>
+      <Dialog.Title>Dialog Title</Dialog.Title>
+      <Dialog.Description>Dialog Description</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body>Dialog Body</Dialog.Body>
+    <Dialog.Footer>
+      <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+      <Button size="sm" x-on:click="$root.close()">Save</Button>
+    </Dialog.Footer>
+  </Dialog.Root>
+
+```astro
+---
+import * as Dialog from '@phantom/ui/dialog';
+---
+
+<Dialog.Root animate={false}>
+  <Button slot="dialog-trigger">Open Dialog</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body>Dialog Body</Dialog.Body>
+  <Dialog.Footer>
+    <Button color="ghost" size="sm" @click="$root.close()"> Cancel </Button>
+    <Button size="sm" @click="$root.close()"> Save </Button>
+  </Dialog.Footer>
+</Dialog.Root>
+```
+
+</Showcase>
+
+## Backdrop
+
+By default, `Dialog{:inline}` component has a backdrop which closes the dialog when clicked.
+
+This can be disabled using the `backdropClose{:inline}` prop.
+
+<Showcase>
+ <Dialog.Root slot="example" backdropClose={false}>
+    <Button slot="dialog-trigger">Open Dialog</Button>
+    <Dialog.Header>
+      <Dialog.Title>Dialog Title</Dialog.Title>
+      <Dialog.Description>Dialog Description</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body>Dialog Body</Dialog.Body>
+    <Dialog.Footer>
+      <Button color="ghost" size="sm" x-on:click="$root.close()">Cancel</Button>
+      <Button size="sm" x-on:click="$root.close()">Save</Button>
+    </Dialog.Footer>
+  </Dialog.Root>
+
+```astro
+---
+import * as Dialog from '@phantom/ui/dialog';
+---
+
+<Dialog.Root backdropClose={false}>
+  <Button slot="dialog-trigger">Open Dialog</Button>
+  <Dialog.Header>
+    <Dialog.Title>Dialog Title</Dialog.Title>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog.Header>
+  <Dialog.Body>Dialog Body</Dialog.Body>
+  <Dialog.Footer>
+    <Button color="ghost" size="sm" @click="$root.close()"> Cancel </Button>
+    <Button size="sm" @click="$root.close()"> Save </Button>
+  </Dialog.Footer>
+</Dialog.Root>
+```
+
+</Showcase>

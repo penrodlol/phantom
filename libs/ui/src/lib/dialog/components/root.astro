@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+type Props = HTMLAttributes<'dialog'> & VariantProps<typeof variants> & { backdropClose?: boolean };
+
+const variants = tv({
+  base: 'bg-surface-1 backdrop:bg-surface-2/90 w-full rounded border',
+  defaultVariants: { size: 'md', animate: true },
+  variants: {
+    animate: { true: 'animate-in motion-safe:fade-in-0 motion-safe:zoom-in-90' },
+    position: { top: 'mt-20 mx-auto', bottom: 'mt-auto mb-20 mx-auto' },
+    size: { sm: 'max-w-sm', md: 'max-w-lg', lg: 'max-w-3xl' },
+  },
+});
+
+const { class: className, position, size, animate, backdropClose, ...props } = Astro.props;
+---
+
+<dialog
+  {...props}
+  x-data
+  x-init="$el.nextElementSibling?.addEventListener('click', () => ($el.showModal(), $setOverflow(false)))"
+  @click={`${backdropClose ?? true} && $event.target === $el && $el.close()`}
+  @close="$setOverflow(true)"
+  class={variants({ position, size, animate, className })}
+>
+  <slot />
+</dialog>
+
+<slot name="dialog-trigger" />
